@@ -14,5 +14,7 @@ namespace Ascendix_Backend.Models
         public decimal rewardAmount { get; set; }
         public bool isActive { get; set; }
         public DateTime createdAt { get; set; }
+
+        public ICollection<UserQuest> userQuests { get; set; } = new List<UserQuest>();
     }
 }

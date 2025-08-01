@@ -10,5 +10,7 @@ namespace Ascendix_Backend.Models
         public Guid libraryId { get; set; }
         public string libraryName { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
+
+        public ICollection<Course> courses { get; set; } = new List<Course>();
     }
 }

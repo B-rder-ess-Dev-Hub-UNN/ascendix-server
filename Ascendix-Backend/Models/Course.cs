@@ -17,5 +17,8 @@ namespace Ascendix_Backend.Models
         public DateTime createdAt { get; set; }
 
         public Library library { get; set; } = new Library();
+        public ICollection<UserCourseProgress> userCourseProgresses { get; set; } = new List<UserCourseProgress>();
+        public ICollection<Certificate> certificates { get; set; } = new List<Certificate>();
+        public ICollection<Module> modules { get; set; } = new List<Module>();
     }
 }
