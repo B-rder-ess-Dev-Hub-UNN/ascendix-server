@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Ascendix_Backend.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Ascendix_Backend.Data
 {
@@ -20,5 +21,11 @@ namespace Ascendix_Backend.Data
         public DbSet<Certificate> certificates { get; set; }
         public DbSet<Quest> quests { get; set; }
         public DbSet<UserQuest> userQuest { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.ConfigureWarnings(warnings => 
+                warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+        }
     }
 }

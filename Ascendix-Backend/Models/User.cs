@@ -8,9 +8,7 @@ namespace Ascendix_Backend.Models
 {
     public class User : IdentityUser
     {
-        public Guid userId { get; set; }
         public string walletAddress { get; set; } = string.Empty;
-        public string userName { get; set; } = string.Empty;
         public decimal totalPoints { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
