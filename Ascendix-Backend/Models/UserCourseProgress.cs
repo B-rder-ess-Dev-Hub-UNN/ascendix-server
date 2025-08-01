@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Ascendix_Backend.Models
+{
+    public class UserCourseProgress
+    {
+        public Guid progressId { get; set; }
+        public Guid userId { get; set; }
+        public Guid courseId { get; set; }
+        public decimal progressPercent { get; set; }
+        public Status status { get; set; }
+        public char grade { get; set; }
+        public string certificateURL { get; set; } = string.Empty;
+        public DateTime completedAt { get; set; }
+
+        public User user { get; set; } = new User();
+        public Course course { get; set; } = new Course();
+    }
+
+    public enum Status
+    {
+        New,
+        OnGoing,
+        Completed
+    }
+}
