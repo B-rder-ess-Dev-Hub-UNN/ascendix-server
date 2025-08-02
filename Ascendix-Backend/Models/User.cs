@@ -10,6 +10,7 @@ namespace Ascendix_Backend.Models
     {
         public string walletAddress { get; set; } = string.Empty;
         public decimal totalPoints { get; set; }
+        
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
 

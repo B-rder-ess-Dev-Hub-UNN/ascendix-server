@@ -25,7 +25,7 @@ namespace Ascendix_Backend.Models
 
     public enum Status
     {
-        New,
+        Pending,
         OnGoing,
         Completed
     }
