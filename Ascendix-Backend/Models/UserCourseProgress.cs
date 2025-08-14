@@ -19,8 +19,8 @@ namespace Ascendix_Backend.Models
         public string certificateURL { get; set; } = string.Empty;
         public DateTime completedAt { get; set; }
 
-        public User user { get; set; } = new User();
-        public Course course { get; set; } = new Course();
+        public User? user { get; set; }
+        public Course? course { get; set; }
     }
 
     public enum Status

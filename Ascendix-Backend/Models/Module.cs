@@ -14,6 +14,6 @@ namespace Ascendix_Backend.Models
         public string title { get; set; } = string.Empty;
         public string courseContent { get; set; } = string.Empty;
         
-        public Course course {get; set; } = new Course();
+        public Course? course {get; set; }
     }
 }

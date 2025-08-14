@@ -15,7 +15,7 @@ namespace Ascendix_Backend.Models
         public string nftTokenId { get; set; } = string.Empty;
         public DateTime issuedAt { get; set; }
 
-        public User user { get; set; } = new User();
-        public Course course { get; set; } = new Course(); 
+        public User? user { get; set; }
+        public Course? course { get; set; }
     }
 }

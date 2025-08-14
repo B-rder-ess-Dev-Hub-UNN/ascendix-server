@@ -10,8 +10,8 @@ namespace Ascendix_Backend.Dto.UserDto
     {
         [Required]
         [EmailAddress]
-        public string email { get; set; } = "";
+        public required string email { get; set; }
         [Required]
-        public string? password { get; set; }
+        public required string password { get; set; }
     }
 }

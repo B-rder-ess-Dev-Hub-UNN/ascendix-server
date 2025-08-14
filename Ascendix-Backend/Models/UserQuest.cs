@@ -15,7 +15,8 @@ namespace Ascendix_Backend.Models
         public Status status { get; set; }
         public DateTime completedAt { get; set; }
 
-        public User user { get; set; } = new User();
-        public Quest quest { get; set; } = new Quest();
+        public User? user { get; set; }
+    
+        public Quest? quest { get; set; }
     }
 }

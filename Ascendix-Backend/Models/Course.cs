@@ -10,7 +10,7 @@ namespace Ascendix_Backend.Models
     {
         [Key]
         public Guid courseId { get; set; }
-        public Guid libraryId { get; set; }
+        public Guid libraryId { get; set; } 
         public string title { get; set; } = string.Empty;
         public string description { get; set; } = string.Empty;
         public decimal rewardAmount { get; set; }
@@ -18,7 +18,7 @@ namespace Ascendix_Backend.Models
         public bool isActive { get; set; }
         public DateTime createdAt { get; set; }
 
-        public Library library { get; set; } = new Library();
+        public Library? library { get; set; }
         public ICollection<UserCourseProgress> userCourseProgresses { get; set; } = new List<UserCourseProgress>();
         public ICollection<Certificate> certificates { get; set; } = new List<Certificate>();
         public ICollection<Module> modules { get; set; } = new List<Module>();
