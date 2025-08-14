@@ -12,5 +12,6 @@ namespace Ascendix_Backend.Interfaces
         public Task<(User? User, string? ErrorMessage)> createUser(string email, string password);
         public Task<(User? User, string? ErrorMessage)> loginUser(string email, string password);
         public Task<string?> token(string userId);
+        public Task<User?> addWalletAddress (string userId, string walletAddress);
     }
 }

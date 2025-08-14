@@ -7,10 +7,10 @@ namespace Ascendix_Backend.Dto.QuestDto
 {
     public class UpdateQuest
     {
-        public string title { get; set; } = string.Empty;
-        public string description { get; set; } = string.Empty;
-        public string actionType { get; set; } = string.Empty;
+        public string? title { get; set; }
+        public string? description { get; set; }
+        public string? actionType { get; set; }
         public decimal rewardAmount { get; set; }
-        public bool isActive { get; set; }
+        public bool? isActive { get; set; }
     }
 }

@@ -29,6 +29,18 @@ namespace Ascendix_Backend.Repositories
             _signInManager = signInManager;
             _tokenService = tokenService;
         }
+
+        public async Task<User?> addWalletAddress(string userId, string walletAddress)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return null;
+
+            user.walletAddress = walletAddress;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
         public async Task<(User? User, string? ErrorMessage)> createUser(string email, string password)
         {
             try

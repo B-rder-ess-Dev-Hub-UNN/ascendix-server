@@ -47,12 +47,18 @@ namespace Ascendix_Backend.Controllers
             var user = await _userRepo.loginUser(login.email, login.password);
 #pragma warning restore CS8604 // Possible null reference argument.
             if (user.User == null) return BadRequest(user.ErrorMessage);
-           var token = await _userRepo.token(user.User.Id);
+            var token = await _userRepo.token(user.User.Id);
             return Ok(new
             {
                 Email = login.email,
                 token = token,
             });
+        }
+
+        [HttpPost("add-wallet-address")]
+        public async Task<IActionResult> addWalletAddress([FromBody] string address)
+        {
+            return StatusCode(404, "");
         }
         
     }
