@@ -30,9 +30,9 @@ namespace LinternBackend.Token
                     new Claim(JwtRegisteredClaimNames.GivenName, user.UserName)
                 };
                 foreach (var role in roles)
-        {
-            claims.Add(new Claim(ClaimTypes.Role, role));
-        }
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role));
+                }
 #pragma warning restore CS8604 // Possible null reference argument.
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256Signature);

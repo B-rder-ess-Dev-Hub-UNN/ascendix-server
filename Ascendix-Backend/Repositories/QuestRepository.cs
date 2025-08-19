@@ -44,7 +44,7 @@ namespace Ascendix_Backend.Repositories
             var quest = await _context.quests.FirstOrDefaultAsync(c => c.questId == id);
             if (quest == null) return null;
             
-            return quest; ;
+            return quest;
         }
 
         public async Task<Quest?> updateQuestAsync(Guid id, UpdateQuest update)
