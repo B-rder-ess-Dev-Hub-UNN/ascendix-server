@@ -12,6 +12,6 @@ namespace Ascendix_Backend.Dto.CourseDto
         public string description { get; set; } = string.Empty;
         public decimal rewardAmount { get; set; }
         public string nftTemplateId { get; set; } = string.Empty;
-        public bool isActive { get; set; }
+        public bool? isActive { get; set; }
     }
 }
