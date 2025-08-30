@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Ascendix_Backend.Dto.CourseDto;
+using Ascendix_Backend.Dto.ModuleDto;
 using Ascendix_Backend.Models;
 
 namespace Ascendix_Backend.Mappers
@@ -27,7 +28,8 @@ namespace Ascendix_Backend.Mappers
             {
                 title = course.title,
                 description = course.description,
-                tokenAllocation = course.tokenAllocation
+                tokenAllocation = course.tokenAllocation,
+                modules = course.modules.Select(m => m.fromModule()).ToList(),
             };
         }
     }

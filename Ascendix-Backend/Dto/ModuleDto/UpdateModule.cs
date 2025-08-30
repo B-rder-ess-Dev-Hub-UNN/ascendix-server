@@ -7,9 +7,9 @@ namespace Ascendix_Backend.Dto.ModuleDto
 {
     public class UpdateModule
     {
-        public Guid courseId { get; set; }
-        public string title { get; set; } = string.Empty;
-        public string courseContent { get; set; } = string.Empty;
+        public Guid? courseId { get; set; }
+        public string? title { get; set; }
+        public string? courseContent { get; set; }
         
     }
 }
