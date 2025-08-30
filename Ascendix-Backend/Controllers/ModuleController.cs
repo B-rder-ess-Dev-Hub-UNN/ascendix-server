@@ -32,7 +32,9 @@ namespace Ascendix_Backend.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> getAll()
         {
-            return Ok(await _moduleRepo.getAll());
+            var module = await _moduleRepo.getAll();
+            var modules = module.Select(m => m.fromModule()).ToList();
+            return Ok(modules);
         }
 
         [HttpGet("get/{id:guid}")]

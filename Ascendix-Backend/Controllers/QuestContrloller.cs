@@ -31,7 +31,9 @@ namespace Ascendix_Backend.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> getall()
         {
-            return Ok(await _questRepo.GetAllQuestsAsync());
+            var quest = await _questRepo.GetAllQuestsAsync();
+            var quests = quest.Select(c => c.fromQuest()).ToList();
+            return Ok(quests);
         }
 
         [HttpGet("get/{id:guid}")]

@@ -26,6 +26,7 @@ namespace Ascendix_Backend.Mappers
         {
             return new ViewCourse
             {
+                id = course.courseId,
                 title = course.title,
                 description = course.description,
                 tokenAllocation = course.tokenAllocation,

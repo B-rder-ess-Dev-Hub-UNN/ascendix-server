@@ -55,11 +55,11 @@ namespace Ascendix_Backend.Controllers
             });
         }
 
-        [HttpPost("add-wallet-address")]
-        public async Task<IActionResult> addWalletAddress([FromBody] string address)
-        {
-            return StatusCode(404, "");
-        }
+        // [HttpPost("add-wallet-address")]
+        // public async Task<IActionResult> addWalletAddress([FromBody] string address)
+        // {
+        //     return StatusCode(404, "");
+        // }
         
     }
 }

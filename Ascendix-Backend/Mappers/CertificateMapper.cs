@@ -22,6 +22,7 @@ namespace Ascendix_Backend.Mappers
         {
             return new ViewCertificate
             {
+                certificateId = certificate.certificateId,
                 courseId = certificate.courseId,
                 metaDataUrl = certificate.metaDataUrl
             };

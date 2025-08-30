@@ -9,6 +9,7 @@ namespace Ascendix_Backend.Dto.CourseDto
 {
     public class ViewCourse
     {
+        public Guid id { get; set;}
         public string title { get; set; } = string.Empty;
         public string description { get; set; } = string.Empty;
         public decimal tokenAllocation { get; set; }

@@ -7,6 +7,7 @@ namespace Ascendix_Backend.Dto.CertificateDto
 {
     public class ViewCertificate
     {
+        public Guid certificateId { get; set;}
         public Guid courseId { get; set; }
         public string metaDataUrl { get; set; } = string.Empty;
     }
