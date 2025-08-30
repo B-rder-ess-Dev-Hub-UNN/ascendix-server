@@ -48,6 +48,11 @@ namespace Ascendix_Backend.Repositories
             return course;
         }
 
+        public async Task<List<Course>> GetCourseByLibrary(Guid id)
+        {
+            return await _context.course.Where(c => c.libraryId == id).ToListAsync();
+        }
+
         public async Task<Course?> Update(Guid id, UpdateCourse update)
         {
             var course = await _context.course.FirstOrDefaultAsync(x => x.courseId == id);

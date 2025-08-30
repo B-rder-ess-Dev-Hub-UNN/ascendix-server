@@ -14,5 +14,6 @@ namespace Ascendix_Backend.Interfaces
         public Task<Course?> Create(Course course);
         public Task<Course?> Update(Guid id, UpdateCourse update);
         public Task<Course?> DeleteById(Guid id);
+        public Task<List<Course>> GetCourseByLibrary(Guid id);
     }
 }
