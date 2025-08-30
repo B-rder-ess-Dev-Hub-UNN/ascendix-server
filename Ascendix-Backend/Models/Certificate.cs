@@ -10,12 +10,9 @@ namespace Ascendix_Backend.Models
     {
         [Key]
         public Guid certificateId { get; set; }
-        public Guid userId { get; set; }
         public Guid courseId { get; set; }
-        public string nftTokenId { get; set; } = string.Empty;
-        public DateTime issuedAt { get; set; }
+        public string metadataUrl { get; set; } = string.Empty;
 
-        public User? user { get; set; }
         public Course? course { get; set; }
     }
 }

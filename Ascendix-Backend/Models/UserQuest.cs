@@ -16,7 +16,6 @@ namespace Ascendix_Backend.Models
         public DateTime completedAt { get; set; }
 
         public User? user { get; set; }
-    
         public Quest? quest { get; set; }
     }
 }

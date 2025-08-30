@@ -16,7 +16,6 @@ namespace Ascendix_Backend.Models
         public decimal progressPercent { get; set; }
         public Status status { get; set; }
         public char grade { get; set; }
-        public string certificateURL { get; set; } = string.Empty;
         public DateTime completedAt { get; set; }
 
         public User? user { get; set; }

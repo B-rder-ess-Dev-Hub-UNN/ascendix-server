@@ -53,7 +53,7 @@ namespace Ascendix_Backend.Repositories
             var library = await _context.library.FirstOrDefaultAsync(x => x.libraryId == id);
             if (library == null) return null;
 
-            if (String.IsNullOrWhiteSpace(update.libraryName)) library.libraryName = update.libraryName;
+            if (string.IsNullOrWhiteSpace(update.libraryName)) library.libraryName = update.libraryName;
             await _context.SaveChangesAsync();
 
             return library;

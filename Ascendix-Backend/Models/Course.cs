@@ -10,12 +10,10 @@ namespace Ascendix_Backend.Models
     {
         [Key]
         public Guid courseId { get; set; }
-        public Guid libraryId { get; set; } 
+        public Guid libraryId { get; set; 
         public string title { get; set; } = string.Empty;
         public string description { get; set; } = string.Empty;
-        public decimal rewardAmount { get; set; }
-        public string nftTemplateId { get; set; } = string.Empty;
-        public bool isActive { get; set; }
+        public decimal tokenAllocation { get; set; }
         public DateTime createdAt { get; set; }
 
         public Library? library { get; set; }
