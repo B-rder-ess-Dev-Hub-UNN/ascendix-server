@@ -11,8 +11,9 @@ namespace Ascendix_Backend.Models
         [Key]
         public Guid certificateId { get; set; }
         public Guid courseId { get; set; }
-        public string metadataUrl { get; set; } = string.Empty;
+        public string metaDataUrl { get; set; } = string.Empty;
 
         public Course? course { get; set; }
+        public ICollection<UserCertificate> userCertificates{ get; set; } = new List<UserCertificate>();
     }
 }

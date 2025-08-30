@@ -53,11 +53,9 @@ namespace Ascendix_Backend.Repositories
             var course = await _context.course.FirstOrDefaultAsync(x => x.courseId == id);
             if (course == null) return null;
 
-            if (!String.IsNullOrWhiteSpace(update.title)) course.title = update.title;
-            if (!String.IsNullOrWhiteSpace(update.description)) course.description = update.description;
-            if (!String.IsNullOrWhiteSpace(update.nftTemplateId)) course.nftTemplateId = update.nftTemplateId;
-            if (update.rewardAmount != default) course.rewardAmount = update.rewardAmount;
-            if (update.isActive.HasValue) course.isActive = update.isActive.Value;   
+            if (!string.IsNullOrWhiteSpace(update.title)) course.title = update.title;
+            if (!string.IsNullOrWhiteSpace(update.description)) course.description = update.description;
+            if (update.tokenAllocation != default) course.tokenAllocation = update.tokenAllocation;  
 
             await _context.SaveChangesAsync();
             return course;

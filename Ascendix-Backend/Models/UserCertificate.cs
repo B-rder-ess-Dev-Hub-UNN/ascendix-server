@@ -11,5 +11,8 @@ namespace Ascendix_Backend.Models
         public Guid certificateId { get; set; }
         public string? userId { get; set; }
         public DateTime issuedAt { get; set; }
+
+        public User? user { get; set; }
+        public Certificate? certificate { get; set; }
     }
 }

@@ -12,5 +12,9 @@ namespace Ascendix_Backend.Models
         public Guid attemptId { get; set; }
         public Guid optionId { get; set; }
         public string? answerText { get; set; }
+
+        public QuizQuestions? question { get; set; }
+        public UserQuizAttempt? attempt { get; set; }
+        public QuestionOptions? options { get; set; }
     }
 }

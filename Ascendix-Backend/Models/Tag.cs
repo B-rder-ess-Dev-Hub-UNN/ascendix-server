@@ -10,5 +10,7 @@ namespace Ascendix_Backend.Models
         public Guid id { get; set; }
         public string? name { get; set; }
         public string? slug { get; set; }
+
+        public ICollection<CourseTag> courseTags{ get; set; } = new List<CourseTag>();
     }
 }

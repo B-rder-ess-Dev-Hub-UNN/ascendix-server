@@ -15,9 +15,8 @@ namespace Ascendix_Backend.Mappers
             {
                 title = create.title,
                 description = create.description,
-                actionType = create.actionType,
-                rewardAmount = create.rewardAmount,
-                isActive = create.isActive,
+                tokenAllocation = create.tokenAllocation,
+                createdAt = DateTime.UtcNow,
             };
         }
 
@@ -28,9 +27,7 @@ namespace Ascendix_Backend.Mappers
                 questId = create.questId,
                 title = create.title,
                 description = create.description,
-                actionType = create.actionType,
-                rewardAmount = create.rewardAmount,
-                isActive = create.isActive,
+                tokenAllocation = create.tokenAllocation
             };
         }
     }

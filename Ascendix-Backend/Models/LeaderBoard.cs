@@ -11,5 +11,7 @@ namespace Ascendix_Backend.Models
         public int rank { get; set; }
         public string? userId { get; set; }
         public decimal earnings { get; set; }
+
+        public User? user{ get; set; }
     }
 }

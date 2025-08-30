@@ -50,7 +50,8 @@ namespace Ascendix_Backend.Repositories
             var userQuest = await _context.userQuest.FirstOrDefaultAsync(x => x.userQuestId == id);
             if (userQuest == null) return null;
 
-            if(!String.IsNullOrWhiteSpace(status)) userQuest.status = status;
+            // if(!String.IsNullOrWhiteSpace(status)) userQuest.status = status.;
+            return userQuest;
 
         }
     }

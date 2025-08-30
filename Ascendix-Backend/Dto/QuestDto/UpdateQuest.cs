@@ -9,8 +9,6 @@ namespace Ascendix_Backend.Dto.QuestDto
     {
         public string? title { get; set; }
         public string? description { get; set; }
-        public string? actionType { get; set; }
-        public decimal rewardAmount { get; set; }
-        public bool? isActive { get; set; }
+        public decimal tokenAllocation { get; set; }
     }
 }

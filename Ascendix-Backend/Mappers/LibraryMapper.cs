@@ -14,7 +14,7 @@ namespace Ascendix_Backend.Mappers
             return new Library
             {
                 libraryName = create.libraryName,
-                Description = create.Description,
+                slug = create.slug,
             };
         }
 
@@ -23,6 +23,7 @@ namespace Ascendix_Backend.Mappers
             return new ViewLibrary
             {
                 libraryName = library.libraryName,
+                slug = library.slug,
             };
         }
     }

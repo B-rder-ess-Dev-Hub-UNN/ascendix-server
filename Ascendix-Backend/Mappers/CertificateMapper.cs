@@ -13,10 +13,8 @@ namespace Ascendix_Backend.Mappers
         {
             return new Certificate
             {
-                userId = create.userId,
                 courseId = create.courseId,
-                nftTokenId = create.nftTokenId,
-                issuedAt = DateTime.UtcNow,
+                metaDataUrl = create.metaDataUrl
             };
         }
 
@@ -24,10 +22,8 @@ namespace Ascendix_Backend.Mappers
         {
             return new ViewCertificate
             {
-                userId = certificate.userId,
                 courseId = certificate.courseId,
-                nftTokenId = certificate.nftTokenId,
-                issuedAt = certificate.issuedAt,
+                metaDataUrl = certificate.metaDataUrl
             };
         }
     }

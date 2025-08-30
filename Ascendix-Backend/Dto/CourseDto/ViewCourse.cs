@@ -9,8 +9,7 @@ namespace Ascendix_Backend.Dto.CourseDto
     {
         public string title { get; set; } = string.Empty;
         public string description { get; set; } = string.Empty;
-        public decimal rewardAmount { get; set; }
-        public bool isActive { get; set; }
+        public decimal tokenAllocation { get; set; }
 
     }
 }

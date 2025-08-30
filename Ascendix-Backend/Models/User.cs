@@ -10,12 +10,15 @@ namespace Ascendix_Backend.Models
     {
         public string walletAddress { get; set; } = string.Empty;
         public decimal totalPoints { get; set; }
-        
+
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
 
         public ICollection<UserQuest> userQuests { get; set; } = new List<UserQuest>();
         public ICollection<UserCourseProgress> userCourseProgresses { get; set; } = new List<UserCourseProgress>();
-        public ICollection<Certificate> certificates { get; set; } = new List<Certificate>();
+        public ICollection<UserCertificate> userCertificates { get; set; } = new List<UserCertificate>();
+        public ICollection<CourseTag> courseTags { get; set; } = new List<CourseTag>();
+        public ICollection<UserQuizAttempt> attempts { get; set; } = new List<UserQuizAttempt>();
+        public ICollection<LeaderBoard> leaderBoards { get; set; } = new List<LeaderBoard>();
     }
 }

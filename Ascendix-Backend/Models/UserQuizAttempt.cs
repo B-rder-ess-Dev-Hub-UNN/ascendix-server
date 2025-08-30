@@ -13,5 +13,9 @@ namespace Ascendix_Backend.Models
         public decimal score { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
+
+        public ModuleQuiz? moduleQuiz { get; set; }
+        public User? user { get; set; }
+        public ICollection<UserAnswer> userAnswers{ get; set; } = new List<UserAnswer>();
     }
 }

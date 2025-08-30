@@ -10,5 +10,8 @@ namespace Ascendix_Backend.Models
         public Guid id { get; set; }
         public Guid tagId { get; set; }
         public Guid courseId { get; set; }
+
+        public Tag? tag { get; set; }
+        public Course? course{ get; set; }
     }
 }

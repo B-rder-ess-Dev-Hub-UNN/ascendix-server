@@ -11,5 +11,8 @@ namespace Ascendix_Backend.Models
         public Guid questionId { get; set; }
         public string? optionText { get; set; }
         public bool isCorrect { get; set; }
+
+        public QuizQuestions? quizQuestions { get; set; }
+        public ICollection<UserAnswer> userAnswers{ get; set; } = new List<UserAnswer>();
     }
 }

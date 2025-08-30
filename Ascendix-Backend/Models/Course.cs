@@ -10,7 +10,7 @@ namespace Ascendix_Backend.Models
     {
         [Key]
         public Guid courseId { get; set; }
-        public Guid libraryId { get; set; 
+        public Guid libraryId { get; set; }
         public string title { get; set; } = string.Empty;
         public string description { get; set; } = string.Empty;
         public decimal tokenAllocation { get; set; }

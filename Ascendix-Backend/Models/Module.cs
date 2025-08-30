@@ -11,10 +11,11 @@ namespace Ascendix_Backend.Models
         [Key]
         public Guid moduleId { get; set; }
         public Guid courseId { get; set; }
-        public int position {get; set; }
+        public int position { get; set; }
         public string title { get; set; } = string.Empty;
         public string courseContent { get; set; } = string.Empty;
-        
-        public Course? course {get; set; }
+
+        public Course? course { get; set; }
+        public ICollection<ModuleQuiz> moduleQuizzes{ get; set; } = new List<ModuleQuiz>();
     }
 }

@@ -22,6 +22,15 @@ namespace Ascendix_Backend.Data
         public DbSet<Certificate> certificates { get; set; }
         public DbSet<Quest> quests { get; set; }
         public DbSet<UserQuest> userQuest { get; set; }
+        public DbSet<Tag> tags { get; set; }
+        public DbSet<CourseTag> courseTags { get; set; }
+        public DbSet<LeaderBoard> leaderBoards { get;  set; }
+        public DbSet<ModuleQuiz> moduleQuizzes { get;  set; }
+        public DbSet<QuestionOptions> questionOptions { get; set; }
+        public DbSet<QuizQuestions> quizQuestions { get; set; }
+        public DbSet<UserAnswer> userAnswers { get; set; }
+        public DbSet<UserCertificate> userCertificates { get; set; }
+        public DbSet<UserQuizAttempt> userQuizAttempts { get; set;}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

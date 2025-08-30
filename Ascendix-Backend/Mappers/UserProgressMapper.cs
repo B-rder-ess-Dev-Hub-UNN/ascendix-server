@@ -30,7 +30,6 @@ namespace Ascendix_Backend.Mappers
                 progressPercent = user.progressPercent,
                 status = user.status,
                 grade = user.grade,
-                certificateURL = user.certificateURL,
                 completedAt = user.completedAt
             };
         }

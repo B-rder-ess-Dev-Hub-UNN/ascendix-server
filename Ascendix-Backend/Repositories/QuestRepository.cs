@@ -54,9 +54,7 @@ namespace Ascendix_Backend.Repositories
 
             if (!string.IsNullOrWhiteSpace(update.title)) quest.title = update.title;
             if (!string.IsNullOrWhiteSpace(update.description)) quest.description = update.description;
-            if (!string.IsNullOrWhiteSpace(update.actionType)) quest.actionType = update.actionType;
-            if (update.rewardAmount != default) quest.rewardAmount = update.rewardAmount;
-            if (update.isActive.HasValue) quest.isActive = update.isActive.Value;
+            if (update.tokenAllocation != default) quest.tokenAllocation = update.tokenAllocation;
 
             await _context.SaveChangesAsync();
             return quest;

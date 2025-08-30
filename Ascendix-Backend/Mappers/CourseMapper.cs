@@ -16,8 +16,8 @@ namespace Ascendix_Backend.Mappers
                 libraryId = create.libraryId,
                 title = create.title,
                 description = create.description,
-                rewardAmount = create.rewardAmount,
-                isActive = create.isActive,
+                tokenAllocation = create.tokenAllocation,
+                createdAt = DateTime.UtcNow
             };
         }
 
@@ -27,8 +27,7 @@ namespace Ascendix_Backend.Mappers
             {
                 title = course.title,
                 description = course.description,
-                rewardAmount = course.rewardAmount,
-                isActive = course.isActive,
+                tokenAllocation = course.tokenAllocation
             };
         }
     }
