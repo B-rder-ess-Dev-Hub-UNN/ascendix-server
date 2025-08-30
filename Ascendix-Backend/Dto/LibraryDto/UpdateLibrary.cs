@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Ascendix_Backend.Dto.LibraryDto
 {
-    public class CreateLibrary
+    public class UpdateLibrary
     {
-        public required string libraryName { get; set; }
-        public required string slug { get; set; }
+        public  string? libraryName { get; set; }
+        public  string? slug { get; set; }
     }
 }

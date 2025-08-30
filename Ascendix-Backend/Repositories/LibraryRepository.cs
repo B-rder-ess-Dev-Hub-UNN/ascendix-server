@@ -37,23 +37,26 @@ namespace Ascendix_Backend.Repositories
 
         public async Task<List<Library>> GetAll()
         {
-            return await _context.library.ToListAsync();
+            return await _context.library.Include(c => c.courses).ToListAsync();
         }
 
         public async Task<Library?> GetById(Guid id)
         {
-            var library = await _context.library.FirstOrDefaultAsync(x => x.libraryId == id);
+            var library = await _context.library.Include(c => c.courses).FirstOrDefaultAsync(x => x.libraryId == id);
             if (library == null) return null;
 
             return library;
         }
 
-        public async Task<Library?> Update(Guid id, ViewLibrary update)
+        public async Task<Library?> Update(Guid id, UpdateLibrary update)
         {
             var library = await _context.library.FirstOrDefaultAsync(x => x.libraryId == id);
             if (library == null) return null;
 
+#pragma warning disable CS8601 // Possible null reference assignment.
             if (string.IsNullOrWhiteSpace(update.libraryName)) library.libraryName = update.libraryName;
+            if (string.IsNullOrWhiteSpace(update.slug)) library.slug = update.slug;
+#pragma warning restore CS8601 // Possible null reference assignment.
             await _context.SaveChangesAsync();
 
             return library;

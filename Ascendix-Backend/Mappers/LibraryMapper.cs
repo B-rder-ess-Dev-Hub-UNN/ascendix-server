@@ -22,6 +22,7 @@ namespace Ascendix_Backend.Mappers
         {
             return new ViewLibrary
             {
+                id = library.libraryId,
                 libraryName = library.libraryName,
                 slug = library.slug,
             };

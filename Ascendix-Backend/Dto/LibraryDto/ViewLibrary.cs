@@ -7,6 +7,7 @@ namespace Ascendix_Backend.Dto.LibraryDto
 {
     public class ViewLibrary
     {
+        public Guid id { get; set; }
         public string libraryName { get; set; } = string.Empty;
         public string? slug { get; set; }
     }
