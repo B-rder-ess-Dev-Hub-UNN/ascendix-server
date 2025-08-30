@@ -32,7 +32,9 @@ namespace Ascendix_Backend.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> getAll()
         {
-            return Ok(await _libRepo.GetAll());
+            var library = await _libRepo.GetAll();
+            var librarys = library.Select(l => l.viewLibrary()).ToList();
+            return Ok(librarys);
         }
 
         [HttpGet("get/{id:guid}")]

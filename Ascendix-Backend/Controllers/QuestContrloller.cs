@@ -22,6 +22,7 @@ namespace Ascendix_Backend.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> createQuest([FromBody] CreateQuest create)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             var quest = create.toQuest();
             await _questRepo.createQuestAsync(quest);
             return Ok(quest.fromQuest());
@@ -36,6 +37,7 @@ namespace Ascendix_Backend.Controllers
         [HttpGet("get/{id:guid}")]
         public async Task<IActionResult> getById([FromRoute] Guid id)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             var quest = await _questRepo.GetQuestByIdAsync(id);
             if (quest == null) return NotFound();
 
@@ -45,6 +47,7 @@ namespace Ascendix_Backend.Controllers
         [HttpPatch("update/{id:guid}")]
         public async Task<IActionResult> updateQuest([FromRoute] Guid id, [FromBody] UpdateQuest update)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             var quest = await _questRepo.updateQuestAsync(id, update);
             if (quest == null) return NotFound();
 
@@ -54,6 +57,7 @@ namespace Ascendix_Backend.Controllers
         [HttpDelete("delete/{id:guid}")]
         public async Task<IActionResult> deleteQuest([FromRoute] Guid id)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             var quest = await _questRepo.deleteQuestByIdAsync(id);
             if (quest == null) return NotFound();
             

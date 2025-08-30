@@ -22,7 +22,8 @@ namespace Ascendix_Backend.Controllers
         public async Task<IActionResult> getAll()
         {
             var course = await _courseRepo.GetAll();
-            return Ok(course);
+            var courses = course.Select(x => x.fromCourse()).ToList();
+            return Ok(courses);
         }
 
         [HttpGet("get/{id:guid}")]

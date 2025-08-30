@@ -26,7 +26,7 @@ namespace Ascendix_Backend.Repositories
 
         public async Task<Course?> DeleteById(Guid id)
         {
-            var course = await _context.course.Include(c => c.modules).FirstOrDefaultAsync(x => x.courseId == id);
+            var course = await _context.course.FirstOrDefaultAsync(x => x.courseId == id);
             if (course == null) return null;
 
             _context.course.Remove(course);
@@ -42,7 +42,7 @@ namespace Ascendix_Backend.Repositories
 
         public async Task<Course?> GetById(Guid id)
         {
-            var course = await _context.course.FirstOrDefaultAsync(x => x.courseId == id);
+            var course = await _context.course.Include(c => c.modules).FirstOrDefaultAsync(x => x.courseId == id);
             if (course == null) return null;
 
             return course;

@@ -15,6 +15,6 @@ namespace Ascendix_Backend.Models
         public decimal tokenAllocation { get; set; }
         public DateTime createdAt { get; set; }
 
-        public ICollection<UserQuest> userQuests { get; set; } = new List<UserQuest>();
+        public UserQuest? userQuest { get; set; }
     }
 }
