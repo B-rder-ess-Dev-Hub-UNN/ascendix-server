@@ -7,7 +7,7 @@ namespace Ascendix_Backend.Models
 {
     public class ModuleQuiz
     {
-        public Guid Id { get; set; }
+        public Guid id { get; set; }
         public Guid moduleId { get; set; }
         public string? title { get; set; }
         public string? description { get; set; }

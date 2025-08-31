@@ -21,6 +21,7 @@ builder.Services.AddScoped<IQuestRepository, QuestRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IModuleRepository, ModuleRepository>();
+builder.Services.AddScoped<IModuleQuizRepository, ModuleQuizRepository>();
 builder.Services.AddScoped<ILibraryRepository, LibraryRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
