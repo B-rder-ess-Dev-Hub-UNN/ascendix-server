@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Ascendix_Backend.Data;
 using Ascendix_Backend.Interfaces;
 using Ascendix_Backend.Models;
@@ -22,12 +23,18 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IModuleRepository, ModuleRepository>();
 builder.Services.AddScoped<IModuleQuizRepository, ModuleQuizRepository>();
+builder.Services.AddScoped<IQuizQuestionRepository, QuizQuestionRepository>();
 builder.Services.AddScoped<ILibraryRepository, LibraryRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
