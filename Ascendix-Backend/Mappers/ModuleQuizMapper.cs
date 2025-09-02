@@ -27,7 +27,8 @@ namespace Ascendix_Backend.Mappers
                 id = quiz.id,
                 moduleId = quiz.moduleId,
                 title = quiz.title,
-                description = quiz.description
+                description = quiz.description,
+                questions = quiz.quizQuestions.Select(q => q.fromQuizQuestion()).ToList(),
             };
         }     
 

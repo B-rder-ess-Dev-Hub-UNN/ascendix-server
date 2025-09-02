@@ -37,12 +37,12 @@ namespace Ascendix_Backend.Repositories
 
         public async Task<List<ModuleQuiz>> getAll()
         {
-            return await _context.moduleQuizzes.ToListAsync();
+            return await _context.moduleQuizzes.Include(c => c.quizQuestions).ToListAsync();
         }
 
         public async Task<ModuleQuiz?> getById(Guid id)
         {
-            var quiz = await _context.moduleQuizzes.FirstOrDefaultAsync(c => c.id == id);
+            var quiz = await _context.moduleQuizzes.Include(c => c.quizQuestions).FirstOrDefaultAsync(c => c.id == id);
             if (quiz == null) return null;
 
             return quiz;

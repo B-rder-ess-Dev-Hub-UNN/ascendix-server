@@ -13,7 +13,7 @@ namespace Ascendix_Backend.Mappers
         {
             return new QuizQuestions
             {
-                quizId = create.quizId,
+                moduleQuizId = create.quizId,
                 questionText = create.questionText,
                 questionType = create.questionType,
             };
@@ -24,7 +24,7 @@ namespace Ascendix_Backend.Mappers
             return new ViewQuizQuestion
             {
                 id = question.id,
-                quizId = question.quizId,
+                moduleQuizId = question.moduleQuizId,
                 questionText = question.questionText,
                 questionType = question.questionType,
             };
