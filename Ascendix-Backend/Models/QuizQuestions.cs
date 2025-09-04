@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,8 +8,9 @@ namespace Ascendix_Backend.Models
 {
     public class QuizQuestions
     {
+        [Key]
         public Guid id { get; set; }
-        public Guid moduleQuizId { get; set; }
+        public Guid quizId { get; set; }
         public string? questionText { get; set; }
         public QuestionType questionType { get; set; }
 

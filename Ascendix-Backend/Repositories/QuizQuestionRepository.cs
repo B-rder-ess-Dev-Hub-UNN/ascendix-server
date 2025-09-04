@@ -52,7 +52,7 @@ namespace Ascendix_Backend.Repositories
             if (question == null) return null;
 
             if (!string.IsNullOrWhiteSpace(update.questionText)) question.questionText = update.questionText;
-            if (update.quizId.HasValue) question.moduleQuizId = update.quizId.Value;
+            if (update.quizId.HasValue) question.quizId = update.quizId.Value;
             if (update.questionType.HasValue) question.questionType = update.questionType.Value;
 
             await _context.SaveChangesAsync();

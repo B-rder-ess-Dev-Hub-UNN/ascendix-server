@@ -4,6 +4,7 @@ using Ascendix_Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ascendix_Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250904002153_Some-change1")]
+    partial class Somechange1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,7 +247,7 @@ namespace Ascendix_Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("moduleQuizId")
+                    b.Property<Guid>("moduleQuizId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("questionText")
@@ -541,13 +544,13 @@ namespace Ascendix_Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e13a3863-d538-4c43-85f0-43fc1d5c2674",
+                            Id = "268a4811-8d2a-4f23-84d4-73ddad466e85",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0f846dec-e2af-4889-9009-06fadbdc043d",
+                            Id = "481e1723-3a00-4ceb-9eb3-1c87e82f2f8d",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -748,7 +751,9 @@ namespace Ascendix_Backend.Migrations
                 {
                     b.HasOne("Ascendix_Backend.Models.ModuleQuiz", "moduleQuiz")
                         .WithMany("quizQuestions")
-                        .HasForeignKey("moduleQuizId");
+                        .HasForeignKey("moduleQuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("moduleQuiz");
                 });
