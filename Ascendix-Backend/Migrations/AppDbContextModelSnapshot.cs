@@ -244,7 +244,7 @@ namespace Ascendix_Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("moduleQuizId")
+                    b.Property<Guid?>("moduleQuizid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("questionText")
@@ -253,9 +253,12 @@ namespace Ascendix_Backend.Migrations
                     b.Property<int>("questionType")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("quizId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("id");
 
-                    b.HasIndex("moduleQuizId");
+                    b.HasIndex("moduleQuizid");
 
                     b.ToTable("quizQuestions");
                 });
@@ -541,13 +544,13 @@ namespace Ascendix_Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e13a3863-d538-4c43-85f0-43fc1d5c2674",
+                            Id = "4c490730-c7be-4444-99ac-5e5958d26cba",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0f846dec-e2af-4889-9009-06fadbdc043d",
+                            Id = "eb10326f-6987-4bea-9b8a-4763152cca55",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -748,7 +751,7 @@ namespace Ascendix_Backend.Migrations
                 {
                     b.HasOne("Ascendix_Backend.Models.ModuleQuiz", "moduleQuiz")
                         .WithMany("quizQuestions")
-                        .HasForeignKey("moduleQuizId");
+                        .HasForeignKey("moduleQuizid");
 
                     b.Navigation("moduleQuiz");
                 });

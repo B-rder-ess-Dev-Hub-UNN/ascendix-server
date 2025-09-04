@@ -27,6 +27,8 @@ builder.Services.AddScoped<IModuleQuizRepository, ModuleQuizRepository>();
 builder.Services.AddScoped<IQuizQuestionRepository, QuizQuestionRepository>();
 builder.Services.AddScoped<IQuestionOptionRepository, QuestionOptionRepository>();
 builder.Services.AddScoped<ILibraryRepository, LibraryRepository>();
+builder.Services.AddScoped<ITagRepository, TagRepository>();
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

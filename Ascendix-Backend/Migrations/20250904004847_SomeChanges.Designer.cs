@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ascendix_Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250801143540_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250904004847_SomeChanges")]
+    partial class SomeChanges
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,24 +34,13 @@ namespace Ascendix_Backend.Migrations
                     b.Property<Guid>("courseId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("issuedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("nftTokenId")
+                    b.Property<string>("metaDataUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("userId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("userId1")
-                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("certificateId");
 
                     b.HasIndex("courseId");
-
-                    b.HasIndex("userId1");
 
                     b.ToTable("certificates");
                 });
@@ -69,22 +58,15 @@ namespace Ascendix_Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isActive")
-                        .HasColumnType("bit");
-
                     b.Property<Guid>("libraryId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("nftTemplateId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("rewardAmount")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("tokenAllocation")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("courseId");
 
@@ -93,17 +75,65 @@ namespace Ascendix_Backend.Migrations
                     b.ToTable("course");
                 });
 
+            modelBuilder.Entity("Ascendix_Backend.Models.CourseTag", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("courseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("tagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("courseId");
+
+                    b.HasIndex("tagId");
+
+                    b.ToTable("courseTags");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.LeaderBoard", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("earnings")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("rank")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("leaderBoards");
+                });
+
             modelBuilder.Entity("Ascendix_Backend.Models.Library", b =>
                 {
                     b.Property<Guid>("libraryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("libraryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("libraryName")
+                    b.Property<string>("slug")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -125,6 +155,9 @@ namespace Ascendix_Backend.Migrations
                     b.Property<Guid>("courseId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("position")
+                        .HasColumnType("int");
+
                     b.Property<string>("title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -136,15 +169,33 @@ namespace Ascendix_Backend.Migrations
                     b.ToTable("modules");
                 });
 
+            modelBuilder.Entity("Ascendix_Backend.Models.ModuleQuiz", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("moduleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("moduleId");
+
+                    b.ToTable("moduleQuizzes");
+                });
+
             modelBuilder.Entity("Ascendix_Backend.Models.Quest", b =>
                 {
                     b.Property<Guid>("questId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("actionType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
@@ -153,19 +204,83 @@ namespace Ascendix_Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isActive")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("rewardAmount")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("tokenAllocation")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("questId");
 
                     b.ToTable("quests");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.QuestionOptions", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("isCorrect")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("optionText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("questionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("quizQuestionsid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("quizQuestionsid");
+
+                    b.ToTable("questionOptions");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.QuizQuestions", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("moduleQuizid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("questionText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("questionType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("quizId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("moduleQuizid");
+
+                    b.ToTable("quizQuestions");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.Tag", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("slug")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("tags");
                 });
 
             modelBuilder.Entity("Ascendix_Backend.Models.User", b =>
@@ -246,15 +361,67 @@ namespace Ascendix_Backend.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Ascendix_Backend.Models.UserAnswer", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("answerText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("attemptId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("optionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("optionsid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("questionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("attemptId");
+
+                    b.HasIndex("optionsid");
+
+                    b.HasIndex("questionId");
+
+                    b.ToTable("userAnswers");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.UserCertificate", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("certificateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("issuedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("userId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("certificateId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("userCertificates");
+                });
+
             modelBuilder.Entity("Ascendix_Backend.Models.UserCourseProgress", b =>
                 {
                     b.Property<Guid>("progressId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("certificateURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("completedAt")
                         .HasColumnType("datetime2");
@@ -310,11 +477,45 @@ namespace Ascendix_Backend.Migrations
 
                     b.HasKey("userQuestId");
 
-                    b.HasIndex("questId");
+                    b.HasIndex("questId")
+                        .IsUnique();
 
                     b.HasIndex("userId1");
 
                     b.ToTable("userQuest");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.UserQuizAttempt", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("moduleQuizid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("quizId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("score")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("updatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("userId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("moduleQuizid");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("userQuizAttempts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -342,6 +543,20 @@ namespace Ascendix_Backend.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "4c490730-c7be-4444-99ac-5e5958d26cba",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "eb10326f-6987-4bea-9b8a-4763152cca55",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -458,13 +673,7 @@ namespace Ascendix_Backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ascendix_Backend.Models.User", "user")
-                        .WithMany("certificates")
-                        .HasForeignKey("userId1");
-
                     b.Navigation("course");
-
-                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Ascendix_Backend.Models.Course", b =>
@@ -478,6 +687,38 @@ namespace Ascendix_Backend.Migrations
                     b.Navigation("library");
                 });
 
+            modelBuilder.Entity("Ascendix_Backend.Models.CourseTag", b =>
+                {
+                    b.HasOne("Ascendix_Backend.Models.User", null)
+                        .WithMany("courseTags")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("Ascendix_Backend.Models.Course", "course")
+                        .WithMany()
+                        .HasForeignKey("courseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ascendix_Backend.Models.Tag", "tag")
+                        .WithMany("courseTags")
+                        .HasForeignKey("tagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("course");
+
+                    b.Navigation("tag");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.LeaderBoard", b =>
+                {
+                    b.HasOne("Ascendix_Backend.Models.User", "user")
+                        .WithMany("leaderBoards")
+                        .HasForeignKey("userId");
+
+                    b.Navigation("user");
+                });
+
             modelBuilder.Entity("Ascendix_Backend.Models.Module", b =>
                 {
                     b.HasOne("Ascendix_Backend.Models.Course", "course")
@@ -487,6 +728,77 @@ namespace Ascendix_Backend.Migrations
                         .IsRequired();
 
                     b.Navigation("course");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.ModuleQuiz", b =>
+                {
+                    b.HasOne("Ascendix_Backend.Models.Module", "module")
+                        .WithMany("moduleQuizzes")
+                        .HasForeignKey("moduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("module");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.QuestionOptions", b =>
+                {
+                    b.HasOne("Ascendix_Backend.Models.QuizQuestions", "quizQuestions")
+                        .WithMany("options")
+                        .HasForeignKey("quizQuestionsid");
+
+                    b.Navigation("quizQuestions");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.QuizQuestions", b =>
+                {
+                    b.HasOne("Ascendix_Backend.Models.ModuleQuiz", "moduleQuiz")
+                        .WithMany("quizQuestions")
+                        .HasForeignKey("moduleQuizid");
+
+                    b.Navigation("moduleQuiz");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.UserAnswer", b =>
+                {
+                    b.HasOne("Ascendix_Backend.Models.UserQuizAttempt", "attempt")
+                        .WithMany("userAnswers")
+                        .HasForeignKey("attemptId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ascendix_Backend.Models.QuestionOptions", "options")
+                        .WithMany("userAnswers")
+                        .HasForeignKey("optionsid");
+
+                    b.HasOne("Ascendix_Backend.Models.QuizQuestions", "question")
+                        .WithMany("answers")
+                        .HasForeignKey("questionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("attempt");
+
+                    b.Navigation("options");
+
+                    b.Navigation("question");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.UserCertificate", b =>
+                {
+                    b.HasOne("Ascendix_Backend.Models.Certificate", "certificate")
+                        .WithMany("userCertificates")
+                        .HasForeignKey("certificateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ascendix_Backend.Models.User", "user")
+                        .WithMany("userCertificates")
+                        .HasForeignKey("userId");
+
+                    b.Navigation("certificate");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Ascendix_Backend.Models.UserCourseProgress", b =>
@@ -509,8 +821,8 @@ namespace Ascendix_Backend.Migrations
             modelBuilder.Entity("Ascendix_Backend.Models.UserQuest", b =>
                 {
                     b.HasOne("Ascendix_Backend.Models.Quest", "quest")
-                        .WithMany("userQuests")
-                        .HasForeignKey("questId")
+                        .WithOne("userQuest")
+                        .HasForeignKey("Ascendix_Backend.Models.UserQuest", "questId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -519,6 +831,21 @@ namespace Ascendix_Backend.Migrations
                         .HasForeignKey("userId1");
 
                     b.Navigation("quest");
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.UserQuizAttempt", b =>
+                {
+                    b.HasOne("Ascendix_Backend.Models.ModuleQuiz", "moduleQuiz")
+                        .WithMany("attempts")
+                        .HasForeignKey("moduleQuizid");
+
+                    b.HasOne("Ascendix_Backend.Models.User", "user")
+                        .WithMany("attempts")
+                        .HasForeignKey("userId");
+
+                    b.Navigation("moduleQuiz");
 
                     b.Navigation("user");
                 });
@@ -574,6 +901,11 @@ namespace Ascendix_Backend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Ascendix_Backend.Models.Certificate", b =>
+                {
+                    b.Navigation("userCertificates");
+                });
+
             modelBuilder.Entity("Ascendix_Backend.Models.Course", b =>
                 {
                     b.Navigation("certificates");
@@ -588,18 +920,58 @@ namespace Ascendix_Backend.Migrations
                     b.Navigation("courses");
                 });
 
+            modelBuilder.Entity("Ascendix_Backend.Models.Module", b =>
+                {
+                    b.Navigation("moduleQuizzes");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.ModuleQuiz", b =>
+                {
+                    b.Navigation("attempts");
+
+                    b.Navigation("quizQuestions");
+                });
+
             modelBuilder.Entity("Ascendix_Backend.Models.Quest", b =>
                 {
-                    b.Navigation("userQuests");
+                    b.Navigation("userQuest");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.QuestionOptions", b =>
+                {
+                    b.Navigation("userAnswers");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.QuizQuestions", b =>
+                {
+                    b.Navigation("answers");
+
+                    b.Navigation("options");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.Tag", b =>
+                {
+                    b.Navigation("courseTags");
                 });
 
             modelBuilder.Entity("Ascendix_Backend.Models.User", b =>
                 {
-                    b.Navigation("certificates");
+                    b.Navigation("attempts");
+
+                    b.Navigation("courseTags");
+
+                    b.Navigation("leaderBoards");
+
+                    b.Navigation("userCertificates");
 
                     b.Navigation("userCourseProgresses");
 
                     b.Navigation("userQuests");
+                });
+
+            modelBuilder.Entity("Ascendix_Backend.Models.UserQuizAttempt", b =>
+                {
+                    b.Navigation("userAnswers");
                 });
 #pragma warning restore 612, 618
         }
