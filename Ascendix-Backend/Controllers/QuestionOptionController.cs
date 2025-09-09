@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ascendix_Backend.Controllers
 {
     [ApiController]
-    [Route("api/options")]
+    [Route("api/v1/options")]
     public class QuestionOptionController : ControllerBase
     {
         private readonly IQuestionOptionRepository _optionRepo;

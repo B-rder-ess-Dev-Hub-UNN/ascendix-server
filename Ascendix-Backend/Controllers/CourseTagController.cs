@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ascendix_Backend.Controllers
 {
     [ApiController]
-    [Route("api/course-tag")]
+    [Route("api/v1/course-tag")]
     public class CourseTagController : ControllerBase
     {
         private readonly ICourseTagRepository _courseTagRepo;
@@ -21,7 +21,7 @@ namespace Ascendix_Backend.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> create(CreateCourseTag create)
+        public async Task<IActionResult> create([FromBody] CreateCourseTag create)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var courseTagModel = create.toCourseTag();

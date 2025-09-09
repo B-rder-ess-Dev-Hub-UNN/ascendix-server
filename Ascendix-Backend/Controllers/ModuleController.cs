@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ascendix_Backend.Controllers
 {
     [ApiController]
-    [Route("api/module")]
+    [Route("api/v1/module")]
     public class ModuleController : ControllerBase
     {
         private readonly IModuleRepository _moduleRepo;

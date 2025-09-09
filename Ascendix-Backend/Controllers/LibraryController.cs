@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ascendix_Backend.Controllers
 {
     [ApiController]
-    [Route("api/library")]
+    [Route("api/v1/library")]
     public class LibraryController : ControllerBase
     {
         private readonly ILibraryRepository _libRepo;

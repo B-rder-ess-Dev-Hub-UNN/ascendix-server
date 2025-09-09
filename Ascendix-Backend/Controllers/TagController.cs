@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ascendix_Backend.Controllers
 {
     [ApiController]
-    [Route("api/tag")]
+    [Route("api/v1/tag")]
     public class TagController : ControllerBase
     {
         private readonly ITagRepository _tagRepo;

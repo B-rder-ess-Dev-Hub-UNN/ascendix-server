@@ -28,6 +28,7 @@ builder.Services.AddScoped<IQuizQuestionRepository, QuizQuestionRepository>();
 builder.Services.AddScoped<IQuestionOptionRepository, QuestionOptionRepository>();
 builder.Services.AddScoped<ILibraryRepository, LibraryRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<ICertificateRepository, CertificateRepository>();
 builder.Services.AddScoped<ICourseTagRepository, CourseTagRepository>();
 
 

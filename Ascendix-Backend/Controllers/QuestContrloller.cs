@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ascendix_Backend.Controllers
 {
     [ApiController]
-    [Route("api/quest")]
+    [Route("api/v1/quest")]
     public class QuestContrloller : ControllerBase
     {
         private readonly IQuestRepository _questRepo;

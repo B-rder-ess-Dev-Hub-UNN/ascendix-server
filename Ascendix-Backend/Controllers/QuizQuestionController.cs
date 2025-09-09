@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ascendix_Backend.Controllers
 {
     [ApiController]
-    [Route("api/question")]
+    [Route("api/v1/question")]
     public class QuizQuestionController : ControllerBase
     {
         private readonly IQuizQuestionRepository _questionRepo;

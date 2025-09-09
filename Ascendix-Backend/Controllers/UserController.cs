@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ascendix_Backend.Controllers
 {
     [ApiController]
-    [Route("api/user")]
+    [Route("api/v1/user")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepo;

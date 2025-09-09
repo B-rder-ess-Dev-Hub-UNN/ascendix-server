@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ascendix_Backend.Controllers
 {
     [ApiController]
-    [Route("api/course")]
+    [Route("api/v1/course")]
     public class CourseController : ControllerBase
     {
         private readonly ICourseRepository _courseRepo;
