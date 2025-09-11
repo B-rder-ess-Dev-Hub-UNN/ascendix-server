@@ -16,7 +16,7 @@ namespace Ascendix_Backend.Repositories
         {
             _context = context;
         }
-        public async Task<UserQuest?> Create(UserQuest userQuest)
+        public async Task<UserQuest> Create(UserQuest userQuest)
         {
             await _context.userQuest.AddAsync(userQuest);
             await _context.SaveChangesAsync();

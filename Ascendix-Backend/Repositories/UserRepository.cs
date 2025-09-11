@@ -41,6 +41,44 @@ namespace Ascendix_Backend.Repositories
             return user;
         }
 
+        public async Task<(User? User, string? ErrorMessage)> createAdmin(string email, string password)
+        {
+            try
+            {
+                var currentAdmin = new User
+                {
+                    Email = email,
+                    UserName = email
+                };
+                var createuser = await _userManager.CreateAsync(currentAdmin, password);
+                if (createuser.Succeeded)
+                {
+                    var RoleResult = await _userManager.AddToRoleAsync(currentAdmin, "Admin");
+                    var userRole = await _userManager.GetRolesAsync(currentAdmin);
+
+                    if (RoleResult.Succeeded)
+                    {
+                        return (currentAdmin, null);
+                    }
+                    else
+                    {
+                        var errors = string.Join("; ", RoleResult.Errors.Select(e => e.Description));
+                        return (null, $"Admin created but role assignment failed: {errors}");
+                    }
+                }
+                else
+                {
+                    var errors = string.Join("; ", createuser.Errors.Select(e => e.Description));
+                    return (null, $"Admin creation failed: {errors}");
+                }
+            }
+            catch (Exception ex)
+            {
+                return (null, $"Unexpected error: {ex.Message}");
+
+            }
+        }
+
         public async Task<(User? User, string? ErrorMessage)> createUser(string email, string password)
         {
             try

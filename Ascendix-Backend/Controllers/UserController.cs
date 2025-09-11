@@ -40,6 +40,19 @@ namespace Ascendix_Backend.Controllers
             });
         }
 
+        [HttpPost("admin/create")]
+        public async Task<IActionResult> createAdmin([FromBody] RegisterUser register)
+        {
+            var user = await _userRepo.createAdmin(register.email, register.password);
+            if (user.User == null) return StatusCode(502, $"{user.ErrorMessage}");
+            var token = await _userRepo.token(user.User.Id);
+            return Ok(new
+            {
+                Email = register.email,
+                token = token,
+            });
+        }
+
         [HttpPost("login")]
         public async Task<IActionResult> login([FromBody] LoginUser login)
         {

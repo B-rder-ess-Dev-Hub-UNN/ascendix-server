@@ -13,7 +13,6 @@ namespace Ascendix_Backend.Mappers
         {
             return new UserQuest
             {
-                userId = create.userId,
                 questId = create.questId,
                 status = Status.OnGoing,
             };
