@@ -50,6 +50,7 @@ builder.Services.AddSwaggerGen(option =>
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IQuestRepository, QuestRepository>();
+builder.Services.AddScoped<IUserQuestRepository, UserQuestRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IModuleRepository, ModuleRepository>();

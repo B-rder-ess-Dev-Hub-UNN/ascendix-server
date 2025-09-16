@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Ascendix_Backend.Data;
+using Ascendix_Backend.Dto.UserQuestDto;
 using Ascendix_Backend.Interfaces;
 using Ascendix_Backend.Models;
 using Microsoft.EntityFrameworkCore;
@@ -18,24 +19,32 @@ namespace Ascendix_Backend.Repositories
         }
         public async Task<UserQuest> Create(UserQuest userQuest)
         {
+            var exists = await _context.userQuest
+                .AnyAsync(uq => uq.userId == userQuest.userId && uq.questId == userQuest.questId);
+
+            if (exists)
+            {
+                throw new InvalidOperationException("User already has this quest.");
+            }
+            userQuest.status = Status.OnGoing;
             await _context.userQuest.AddAsync(userQuest);
             await _context.SaveChangesAsync();
             return userQuest;
         }
 
-        public async Task<UserQuest?> DeleteById(Guid id)
+        public async Task<UserQuest?> DeleteById(Guid id, string userId)
         {
             var userQuest = await _context.userQuest.FirstOrDefaultAsync(x => x.userQuestId == id);
-            if (userQuest == null) return null;
+            if (userQuest == null || userQuest.userId != userId) return null;
 
             _context.userQuest.Remove(userQuest);
             await _context.SaveChangesAsync();
             return userQuest;
         }
 
-        public async Task<List<UserQuest>> GetAll()
+        public async Task<List<UserQuest>> GetAll(string id)
         {
-            return await _context.userQuest.ToListAsync();
+            return await _context.userQuest.Where(c => c.userId == id).ToListAsync();
         }
 
         public async Task<UserQuest?> GetbyId(Guid id)
@@ -45,12 +54,16 @@ namespace Ascendix_Backend.Repositories
             return userQuest;
         }
 
-        public async Task<UserQuest?> UpdateStatus(Guid id, string status)
+        public async Task<UserQuest?> UpdateStatus(Guid id,string userId, UpdateUserQuest update)
         {
             var userQuest = await _context.userQuest.FirstOrDefaultAsync(x => x.userQuestId == id);
-            if (userQuest == null) return null;
+            if (userQuest == null || userQuest.userId != userId) return null;
 
-            // if(!String.IsNullOrWhiteSpace(status)) userQuest.status = status.;
+            if (update.status.HasValue)
+            {
+                userQuest.status = update.status.Value;
+                userQuest.completedAt = DateTime.UtcNow;
+            }
             return userQuest;
 
         }

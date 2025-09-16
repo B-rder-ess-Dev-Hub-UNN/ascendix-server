@@ -466,10 +466,7 @@ namespace Ascendix_Backend.Migrations
                     b.Property<int>("status")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("userId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("userId1")
+                    b.Property<string>("userId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("userQuestId");
@@ -477,7 +474,7 @@ namespace Ascendix_Backend.Migrations
                     b.HasIndex("questId")
                         .IsUnique();
 
-                    b.HasIndex("userId1");
+                    b.HasIndex("userId");
 
                     b.ToTable("userQuest");
                 });
@@ -544,13 +541,13 @@ namespace Ascendix_Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4c490730-c7be-4444-99ac-5e5958d26cba",
+                            Id = "411fe747-e49d-4c70-9987-1aee6a829725",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "eb10326f-6987-4bea-9b8a-4763152cca55",
+                            Id = "49560453-a0d2-486c-bfc8-ca1cb80e2dec",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -825,7 +822,7 @@ namespace Ascendix_Backend.Migrations
 
                     b.HasOne("Ascendix_Backend.Models.User", "user")
                         .WithMany("userQuests")
-                        .HasForeignKey("userId1");
+                        .HasForeignKey("userId");
 
                     b.Navigation("quest");
 

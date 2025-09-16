@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ascendix_Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class SomeChanges : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -249,18 +249,17 @@ namespace Ascendix_Backend.Migrations
                 columns: table => new
                 {
                     userQuestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    userId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    userId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     questId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     status = table.Column<int>(type: "int", nullable: false),
-                    completedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    userId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    completedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_userQuest", x => x.userQuestId);
                     table.ForeignKey(
-                        name: "FK_userQuest_AspNetUsers_userId1",
-                        column: x => x.userId1,
+                        name: "FK_userQuest_AspNetUsers_userId",
+                        column: x => x.userId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -521,8 +520,8 @@ namespace Ascendix_Backend.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4c490730-c7be-4444-99ac-5e5958d26cba", null, "Admin", "ADMIN" },
-                    { "eb10326f-6987-4bea-9b8a-4763152cca55", null, "User", "USER" }
+                    { "411fe747-e49d-4c70-9987-1aee6a829725", null, "Admin", "ADMIN" },
+                    { "49560453-a0d2-486c-bfc8-ca1cb80e2dec", null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -656,9 +655,9 @@ namespace Ascendix_Backend.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_userQuest_userId1",
+                name: "IX_userQuest_userId",
                 table: "userQuest",
-                column: "userId1");
+                column: "userId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_userQuizAttempts_moduleQuizid",
