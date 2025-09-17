@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ascendix_Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class FixingIds : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,8 +61,8 @@ namespace Ascendix_Backend.Migrations
                 columns: table => new
                 {
                     libraryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    libraryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    slug = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    libraryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    slug = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -420,19 +420,19 @@ namespace Ascendix_Backend.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    quizId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    moduleQuizId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     questionText = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    questionType = table.Column<int>(type: "int", nullable: false),
-                    moduleQuizid = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    questionType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_quizQuestions", x => x.id);
                     table.ForeignKey(
-                        name: "FK_quizQuestions_moduleQuizzes_moduleQuizid",
-                        column: x => x.moduleQuizid,
+                        name: "FK_quizQuestions_moduleQuizzes_moduleQuizId",
+                        column: x => x.moduleQuizId,
                         principalTable: "moduleQuizzes",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -440,12 +440,11 @@ namespace Ascendix_Backend.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    quizId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    moduleQuizId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     userId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     score = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     createdAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    moduleQuizid = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -456,10 +455,11 @@ namespace Ascendix_Backend.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_userQuizAttempts_moduleQuizzes_moduleQuizid",
-                        column: x => x.moduleQuizid,
+                        name: "FK_userQuizAttempts_moduleQuizzes_moduleQuizId",
+                        column: x => x.moduleQuizId,
                         principalTable: "moduleQuizzes",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -488,31 +488,29 @@ namespace Ascendix_Backend.Migrations
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     questionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    attemptId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    optionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    answerText = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    optionsid = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    userQuizAttemptId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    questionOptionsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    answerText = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_userAnswers", x => x.id);
                     table.ForeignKey(
-                        name: "FK_userAnswers_questionOptions_optionsid",
-                        column: x => x.optionsid,
+                        name: "FK_userAnswers_questionOptions_questionOptionsId",
+                        column: x => x.questionOptionsId,
                         principalTable: "questionOptions",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_userAnswers_quizQuestions_questionId",
                         column: x => x.questionId,
                         principalTable: "quizQuestions",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                     table.ForeignKey(
-                        name: "FK_userAnswers_userQuizAttempts_attemptId",
-                        column: x => x.attemptId,
+                        name: "FK_userAnswers_userQuizAttempts_userQuizAttemptId",
+                        column: x => x.userQuizAttemptId,
                         principalTable: "userQuizAttempts",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.InsertData(
@@ -520,8 +518,8 @@ namespace Ascendix_Backend.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "411fe747-e49d-4c70-9987-1aee6a829725", null, "Admin", "ADMIN" },
-                    { "49560453-a0d2-486c-bfc8-ca1cb80e2dec", null, "User", "USER" }
+                    { "1bd183a2-1aa9-4170-9955-1a10c587df39", null, "User", "USER" },
+                    { "2156e65b-899b-483a-9204-c1d7ffba2697", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -609,24 +607,24 @@ namespace Ascendix_Backend.Migrations
                 column: "quizQuestionsid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_quizQuestions_moduleQuizid",
+                name: "IX_quizQuestions_moduleQuizId",
                 table: "quizQuestions",
-                column: "moduleQuizid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_userAnswers_attemptId",
-                table: "userAnswers",
-                column: "attemptId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_userAnswers_optionsid",
-                table: "userAnswers",
-                column: "optionsid");
+                column: "moduleQuizId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_userAnswers_questionId",
                 table: "userAnswers",
                 column: "questionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_userAnswers_questionOptionsId",
+                table: "userAnswers",
+                column: "questionOptionsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_userAnswers_userQuizAttemptId",
+                table: "userAnswers",
+                column: "userQuizAttemptId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_userCertificates_certificateId",
@@ -660,9 +658,9 @@ namespace Ascendix_Backend.Migrations
                 column: "userId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_userQuizAttempts_moduleQuizid",
+                name: "IX_userQuizAttempts_moduleQuizId",
                 table: "userQuizAttempts",
-                column: "moduleQuizid");
+                column: "moduleQuizId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_userQuizAttempts_userId",

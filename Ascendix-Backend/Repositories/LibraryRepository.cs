@@ -54,8 +54,8 @@ namespace Ascendix_Backend.Repositories
             if (library == null) return null;
 
 #pragma warning disable CS8601 // Possible null reference assignment.
-            if (string.IsNullOrWhiteSpace(update.libraryName)) library.libraryName = update.libraryName;
-            if (string.IsNullOrWhiteSpace(update.slug)) library.slug = update.slug;
+            if (!string.IsNullOrWhiteSpace(update.libraryName)) library.libraryName = update.libraryName;
+            if (!string.IsNullOrWhiteSpace(update.slug)) library.slug = update.slug;
 #pragma warning restore CS8601 // Possible null reference assignment.
             await _context.SaveChangesAsync();
 

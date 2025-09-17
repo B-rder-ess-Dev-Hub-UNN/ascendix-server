@@ -9,8 +9,8 @@ namespace Ascendix_Backend.Models
     {
         public Guid id { get; set; }
         public Guid questionId { get; set; }
-        public Guid attemptId { get; set; }
-        public Guid optionId { get; set; }
+        public Guid userQuizAttemptId { get; set; }
+        public Guid questionOptionsId { get; set; }
         public string? answerText { get; set; }
 
         public QuizQuestions? question { get; set; }

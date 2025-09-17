@@ -49,6 +49,25 @@ namespace Ascendix_Backend.Data
                 }
                 };
             builder.Entity<IdentityRole>().HasData(role);
+
+            //this is where the relationships between useranswer and other tables is declared
+            builder.Entity<UserAnswer>()
+                .HasOne(ua => ua.attempt)
+                .WithMany(uqa => uqa.userAnswers)
+                .HasForeignKey(ua => ua.userQuizAttemptId)
+                .OnDelete(DeleteBehavior.NoAction); // 👈 no cascade here
+
+            builder.Entity<UserAnswer>()
+                .HasOne(ua => ua.question)
+                .WithMany(q => q.answers)
+                .HasForeignKey(ua => ua.questionId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<UserAnswer>()
+                .HasOne(ua => ua.options)
+                .WithMany(qo => qo.userAnswers)
+                .HasForeignKey(ua => ua.questionOptionsId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

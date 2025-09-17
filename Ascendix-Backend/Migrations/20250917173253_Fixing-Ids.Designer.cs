@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ascendix_Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250913102051_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250917173253_Fixing-Ids")]
+    partial class FixingIds
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,11 +130,9 @@ namespace Ascendix_Backend.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("libraryName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("slug")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("libraryId");
@@ -247,7 +245,7 @@ namespace Ascendix_Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("moduleQuizid")
+                    b.Property<Guid>("moduleQuizId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("questionText")
@@ -256,12 +254,9 @@ namespace Ascendix_Backend.Migrations
                     b.Property<int>("questionType")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("quizId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("id");
 
-                    b.HasIndex("moduleQuizid");
+                    b.HasIndex("moduleQuizId");
 
                     b.ToTable("quizQuestions");
                 });
@@ -370,25 +365,22 @@ namespace Ascendix_Backend.Migrations
                     b.Property<string>("answerText")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("attemptId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("optionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("optionsid")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("questionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("questionOptionsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("userQuizAttemptId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("id");
 
-                    b.HasIndex("attemptId");
-
-                    b.HasIndex("optionsid");
-
                     b.HasIndex("questionId");
+
+                    b.HasIndex("questionOptionsId");
+
+                    b.HasIndex("userQuizAttemptId");
 
                     b.ToTable("userAnswers");
                 });
@@ -491,10 +483,7 @@ namespace Ascendix_Backend.Migrations
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("moduleQuizid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("quizId")
+                    b.Property<Guid>("moduleQuizId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("score")
@@ -508,7 +497,7 @@ namespace Ascendix_Backend.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("moduleQuizid");
+                    b.HasIndex("moduleQuizId");
 
                     b.HasIndex("userId");
 
@@ -544,13 +533,13 @@ namespace Ascendix_Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "411fe747-e49d-4c70-9987-1aee6a829725",
+                            Id = "2156e65b-899b-483a-9204-c1d7ffba2697",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "49560453-a0d2-486c-bfc8-ca1cb80e2dec",
+                            Id = "1bd183a2-1aa9-4170-9955-1a10c587df39",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -751,27 +740,31 @@ namespace Ascendix_Backend.Migrations
                 {
                     b.HasOne("Ascendix_Backend.Models.ModuleQuiz", "moduleQuiz")
                         .WithMany("quizQuestions")
-                        .HasForeignKey("moduleQuizid");
+                        .HasForeignKey("moduleQuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("moduleQuiz");
                 });
 
             modelBuilder.Entity("Ascendix_Backend.Models.UserAnswer", b =>
                 {
-                    b.HasOne("Ascendix_Backend.Models.UserQuizAttempt", "attempt")
-                        .WithMany("userAnswers")
-                        .HasForeignKey("attemptId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("Ascendix_Backend.Models.QuizQuestions", "question")
+                        .WithMany("answers")
+                        .HasForeignKey("questionId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Ascendix_Backend.Models.QuestionOptions", "options")
                         .WithMany("userAnswers")
-                        .HasForeignKey("optionsid");
-
-                    b.HasOne("Ascendix_Backend.Models.QuizQuestions", "question")
-                        .WithMany("answers")
-                        .HasForeignKey("questionId")
+                        .HasForeignKey("questionOptionsId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ascendix_Backend.Models.UserQuizAttempt", "attempt")
+                        .WithMany("userAnswers")
+                        .HasForeignKey("userQuizAttemptId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("attempt");
@@ -836,7 +829,9 @@ namespace Ascendix_Backend.Migrations
                 {
                     b.HasOne("Ascendix_Backend.Models.ModuleQuiz", "moduleQuiz")
                         .WithMany("attempts")
-                        .HasForeignKey("moduleQuizid");
+                        .HasForeignKey("moduleQuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Ascendix_Backend.Models.User", "user")
                         .WithMany("attempts")
