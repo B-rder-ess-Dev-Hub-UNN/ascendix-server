@@ -13,9 +13,8 @@ namespace Ascendix_Backend.Mappers
         {
             return new UserCourseProgress
             {
-                userId = create.userId,
                 courseId = create.courseId,
-                progressPercent = create.progressPercent,
+                progressPercent = 0,
                 status = Status.OnGoing,
             };
         }

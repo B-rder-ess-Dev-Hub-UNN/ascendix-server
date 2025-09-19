@@ -8,10 +8,7 @@ namespace Ascendix_Backend.Dto.UserCourseProgressDto
 {
     public class CreateUserCourseProgress
     {
-        public Guid userId { get; set; }
         public Guid courseId { get; set; }
-        public decimal progressPercent { get; set; }
-        public Status status { get; set; }
 
     }
 }

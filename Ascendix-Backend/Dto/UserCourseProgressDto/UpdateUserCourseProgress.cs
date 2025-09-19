@@ -8,12 +8,9 @@ namespace Ascendix_Backend.Dto.UserCourseProgressDto
 {
     public class UpdateUserCourseProgress
     {
-        public Guid userId { get; set; }
-        public Guid courseId { get; set; }
-        public decimal progressPercent { get; set; }
-        public Status status { get; set; }
-        public char grade { get; set; }
-        public string certificateURL { get; set; } = string.Empty;
+        public Guid? courseId { get; set; }
+        public decimal? progressPercent { get; set; }
+        public Status? status { get; set; }
 
     }
 }
