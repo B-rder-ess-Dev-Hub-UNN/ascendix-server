@@ -13,8 +13,6 @@ namespace Ascendix_Backend.Dto.UserCourseProgressDto
         public Guid courseId { get; set; }
         public decimal progressPercent { get; set; }
         public Status status { get; set; }
-        public char grade { get; set; }
-        public string certificateURL { get; set; } = string.Empty;
-        public DateTime completedAt { get; set; }
+        
     }
 }

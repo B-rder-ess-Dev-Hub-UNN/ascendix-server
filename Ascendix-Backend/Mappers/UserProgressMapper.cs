@@ -27,9 +27,7 @@ namespace Ascendix_Backend.Mappers
                 userId = user.userId,
                 courseId = user.courseId,
                 progressPercent = user.progressPercent,
-                status = user.status,
-                grade = user.grade,
-                completedAt = user.completedAt
+                status = user.status
             };
         }
     }

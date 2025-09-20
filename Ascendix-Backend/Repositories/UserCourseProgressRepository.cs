@@ -27,14 +27,14 @@ namespace Ascendix_Backend.Repositories
             if (userCourseProgress == null) return null;
             return userCourseProgress;
         }
-        public async Task<UserCourseProgress?> create(string id, UserCourseProgress create)
+        public async Task<UserCourseProgress> create(string id, UserCourseProgress create)
         {
             var exists = await _context.userCourseProgresses
                 .AnyAsync(uq => uq.userId == id && uq.progressId == create.courseId);
 
             if (exists)
             {
-                throw new InvalidOperationException("User already has this quest.");
+                throw new InvalidOperationException("User already has this course.");
             }
             create.status = Status.OnGoing;
             await _context.userCourseProgresses.AddAsync(create);
