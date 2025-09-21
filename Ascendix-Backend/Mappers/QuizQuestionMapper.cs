@@ -16,6 +16,7 @@ namespace Ascendix_Backend.Mappers
                 moduleQuizId = create.quizId,
                 questionText = create.questionText,
                 questionType = create.questionType,
+                questionScore = create.questionScore,
             };
         }
 
@@ -27,6 +28,7 @@ namespace Ascendix_Backend.Mappers
                 quizId = question.moduleQuizId,
                 questionText = question.questionText,
                 questionType = question.questionType,
+                questionScore = question.questionScore
             };
         }
     }

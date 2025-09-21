@@ -62,6 +62,7 @@ builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<ICertificateRepository, CertificateRepository>();
 builder.Services.AddScoped<IUserCourseProgressRepository, UserCourseProgressRepository>();
 builder.Services.AddScoped<IUserCertificateRepository, UserCertificateRepository>();
+builder.Services.AddScoped<IUserQuizAttemptRepository, UserQuizAttemptRepository>();
 builder.Services.AddScoped<ICourseTagRepository, CourseTagRepository>();
 
 

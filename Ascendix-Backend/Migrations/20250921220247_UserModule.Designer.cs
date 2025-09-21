@@ -4,6 +4,7 @@ using Ascendix_Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ascendix_Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250921220247_UserModule")]
+    partial class UserModule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -444,33 +447,6 @@ namespace Ascendix_Backend.Migrations
                     b.ToTable("userCourseProgresses");
                 });
 
-            modelBuilder.Entity("Ascendix_Backend.Models.UserModule", b =>
-                {
-                    b.Property<Guid>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("moduleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("progressPercent")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("userId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("moduleId");
-
-                    b.HasIndex("userId");
-
-                    b.ToTable("userModules");
-                });
-
             modelBuilder.Entity("Ascendix_Backend.Models.UserQuest", b =>
                 {
                     b.Property<Guid>("userQuestId")
@@ -558,13 +534,13 @@ namespace Ascendix_Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1e3b7f81-d707-44f5-9aa4-1c6ff5d1a3c9",
+                            Id = "94c1ed7c-8fb1-4ea2-9ab5-841f8354d866",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c76c2e6f-795c-415d-a9f7-381443b41dce",
+                            Id = "8ebbdc74-7375-49fa-9d81-8159af1d35cc",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -829,23 +805,6 @@ namespace Ascendix_Backend.Migrations
                         .HasForeignKey("userId");
 
                     b.Navigation("course");
-
-                    b.Navigation("user");
-                });
-
-            modelBuilder.Entity("Ascendix_Backend.Models.UserModule", b =>
-                {
-                    b.HasOne("Ascendix_Backend.Models.Module", "modules")
-                        .WithMany()
-                        .HasForeignKey("moduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Ascendix_Backend.Models.User", "user")
-                        .WithMany()
-                        .HasForeignKey("userId");
-
-                    b.Navigation("modules");
 
                     b.Navigation("user");
                 });

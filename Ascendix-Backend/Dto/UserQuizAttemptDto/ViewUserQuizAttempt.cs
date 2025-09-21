@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ascendix_Backend.Models
+namespace Ascendix_Backend.Dto.UserQuizAttemptDto
 {
-    public class UserQuizAttempt
+    public class ViewUserQuizAttempt
     {
         public Guid id { get; set; }
         public Guid moduleQuizId { get; set; }
@@ -13,9 +13,5 @@ namespace Ascendix_Backend.Models
         public int score { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
-
-        public ModuleQuiz? moduleQuiz { get; set; }
-        public User? user { get; set; }
-        public ICollection<UserAnswer> userAnswers{ get; set; } = new List<UserAnswer>();
     }
 }

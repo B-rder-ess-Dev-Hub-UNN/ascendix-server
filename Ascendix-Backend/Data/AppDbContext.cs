@@ -31,6 +31,7 @@ namespace Ascendix_Backend.Data
         public DbSet<UserAnswer> userAnswers { get; set; }
         public DbSet<UserCertificate> userCertificates { get; set; }
         public DbSet<UserQuizAttempt> userQuizAttempts { get; set;}
+        public DbSet<UserModule> userModules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

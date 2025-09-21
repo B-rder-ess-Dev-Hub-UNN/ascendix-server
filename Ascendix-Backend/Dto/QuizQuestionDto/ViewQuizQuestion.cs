@@ -11,6 +11,7 @@ namespace Ascendix_Backend.Dto.QuizQuestionDto
         public Guid id { get; set; }
         public Guid quizId { get; set; }
         public string? questionText { get; set; }
+        public int questionScore { get; set; }
         public QuestionType questionType { get; set; }
     }
 }
