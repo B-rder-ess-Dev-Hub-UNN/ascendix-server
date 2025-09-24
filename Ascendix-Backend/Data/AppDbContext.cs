@@ -61,7 +61,7 @@ namespace Ascendix_Backend.Data
             builder.Entity<UserAnswer>()
                 .HasOne(ua => ua.question)
                 .WithMany(q => q.answers)
-                .HasForeignKey(ua => ua.questionId)
+                .HasForeignKey(ua => ua.quizQuestionId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<UserAnswer>()

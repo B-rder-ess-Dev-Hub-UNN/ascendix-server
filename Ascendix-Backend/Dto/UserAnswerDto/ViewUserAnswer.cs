@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ascendix_Backend.Models
+namespace Ascendix_Backend.Dto.UserAnswerDto
 {
-    public class UserAnswer
+    public class ViewUserAnswer
     {
         public Guid id { get; set; }
         public Guid quizQuestionId { get; set; }
         public Guid userQuizAttemptId { get; set; }
         public Guid questionOptionsId { get; set; }
         public string? answerText { get; set; }
-
-        public QuizQuestions? question { get; set; }
-        public UserQuizAttempt? attempt { get; set; }
-        public QuestionOptions? options { get; set; }
     }
 }

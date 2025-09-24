@@ -55,6 +55,14 @@ namespace Ascendix_Backend.Repositories
             return attempt;
         }
 
+        public async Task<UserQuizAttempt?> getByIdAlone(Guid id)
+        {
+            var attempt = await _context.userQuizAttempts.FirstOrDefaultAsync(x => x.id == id);
+            if (attempt == null) return null;
+
+            return attempt;
+        }
+
         public async Task<UserQuizAttempt?> update(Guid id, string userId, UpdateUserQuizAttempt update)
         {
             var attempt = await getById(id, userId);

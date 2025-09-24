@@ -64,6 +64,7 @@ builder.Services.AddScoped<IUserCourseProgressRepository, UserCourseProgressRepo
 builder.Services.AddScoped<IUserCertificateRepository, UserCertificateRepository>();
 builder.Services.AddScoped<IUserQuizAttemptRepository, UserQuizAttemptRepository>();
 builder.Services.AddScoped<IUserModuleRepository, UserModuleRepository>();
+builder.Services.AddScoped<IUserAnswerRepository, UserAnswerRepository>();
 builder.Services.AddScoped<ICourseTagRepository, CourseTagRepository>();
 
 

@@ -5,13 +5,9 @@ using System.Threading.Tasks;
 
 namespace Ascendix_Backend.Dto.UserAnswerDto
 {
-    public class CreateUserAnswer
+    public class UpdateUserAnswer
     {
-        public Guid questionId { get; set; }
-        public Guid attemptId { get; set; }
-        public Guid optionId { get; set; }
+        public Guid? questionOptionsId { get; set; }
         public string? answerText { get; set; }
-
-        
     }
 }
