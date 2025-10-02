@@ -19,6 +19,5 @@ namespace Ascendix_Backend.Models
         public ICollection<UserCertificate> userCertificates { get; set; } = new List<UserCertificate>();
         public ICollection<CourseTag> courseTags { get; set; } = new List<CourseTag>();
         public ICollection<UserQuizAttempt> attempts { get; set; } = new List<UserQuizAttempt>();
-        public ICollection<LeaderBoard> leaderBoards { get; set; } = new List<LeaderBoard>();
     }
 }

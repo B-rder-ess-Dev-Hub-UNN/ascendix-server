@@ -10,10 +10,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using dotenv;
+using dotenv.net;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+DotEnv.Load();
+builder.Configuration.AddEnvironmentVariables();
 // Add services to the container.
 
 builder.Services.AddEndpointsApiExplorer();
@@ -67,10 +70,11 @@ builder.Services.AddScoped<IUserModuleRepository, UserModuleRepository>();
 builder.Services.AddScoped<IUserAnswerRepository, UserAnswerRepository>();
 builder.Services.AddScoped<ICourseTagRepository, CourseTagRepository>();
 
+var connection_string = builder.Configuration["CONNECTION_STRING"];
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(connection_string);
 });
 
 
@@ -109,12 +113,12 @@ builder.Services.AddAuthentication(options =>
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
-        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidIssuer = builder.Configuration["JWT_ISSUER"],
         ValidateAudience = true,
-        ValidAudience = builder.Configuration["JWT:Audience"],
+        ValidAudience = builder.Configuration["JWT_AUDIENCE"],
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
-            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"])
+            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT_SIGNINKEY"])
         )
     };
 #pragma warning restore CS8604 // Possible null reference argument.

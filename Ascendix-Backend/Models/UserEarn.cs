@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Ascendix_Backend.Models
 {
-    public class LeaderBoard
+    public class UserEarn
     {
         public Guid id { get; set; }
-        public int rank { get; set; }
         public string? userId { get; set; }
-        public decimal earnings { get; set; }
+        public decimal amountEarned { get; set; }
+        public DateTime earnedAt { get; set; }
 
-        public User? user{ get; set; }
+        public User? user {get; set; }
     }
 }

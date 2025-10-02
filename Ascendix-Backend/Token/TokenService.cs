@@ -18,7 +18,7 @@ namespace LinternBackend.Token
         {
             _config = config;
 #pragma warning disable CS8604 // Possible null reference argument.
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT_SIGNINKEY"]));
 #pragma warning restore CS8604 // Possible null reference argument.
         }
         public string CreateToken(User user, IList<String> roles)
@@ -42,8 +42,8 @@ namespace LinternBackend.Token
                     Subject = new ClaimsIdentity(claims),
                     Expires = DateTime.Now.AddDays(7),
                     SigningCredentials = creds,
-                    Issuer = _config["JWT:Issuer"],
-                    Audience = _config["JWT:Audience"],
+                    Issuer = _config["JWT_ISSUER"],
+                    Audience = _config["JWT_AUDIENCE"],
                 };
 
                 var tokenHandler = new JwtSecurityTokenHandler();

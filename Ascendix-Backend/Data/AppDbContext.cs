@@ -24,7 +24,6 @@ namespace Ascendix_Backend.Data
         public DbSet<UserQuest> userQuest { get; set; }
         public DbSet<Tag> tags { get; set; }
         public DbSet<CourseTag> courseTags { get; set; }
-        public DbSet<LeaderBoard> leaderBoards { get;  set; }
         public DbSet<ModuleQuiz> moduleQuizzes { get;  set; }
         public DbSet<QuestionOptions> questionOptions { get; set; }
         public DbSet<QuizQuestions> quizQuestions { get; set; }
