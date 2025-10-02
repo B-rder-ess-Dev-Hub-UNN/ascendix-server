@@ -6,14 +6,20 @@ using System.Threading.Tasks;
 
 namespace Ascendix_Backend.Models
 {
-    public class UserEarn
+    public class UserPay
     {
         public Guid id { get; set; }
         public string? userId { get; set; }
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal amountEarned { get; set; }
-        public DateTime earnedAt { get; set; }
 
-        public User? user {get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal amountPayed { get; set; }
+        public PaymentStatus paymentStatus { get; set; } 
+        public DateTime datePayed { get; set; }
+    }
+
+    public enum PaymentStatus
+    {
+        Pending,
+        Successfull
     }
 }

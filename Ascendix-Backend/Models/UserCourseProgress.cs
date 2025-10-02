@@ -13,7 +13,7 @@ namespace Ascendix_Backend.Models
         public Guid progressId { get; set; }
         public string? userId { get; set; }
         public Guid courseId { get; set; }
-        public decimal progressPercent { get; set; }
+        public int progressPercent { get; set; }
         public Status status { get; set; }
         public char grade { get; set; }
         public DateTime completedAt { get; set; }

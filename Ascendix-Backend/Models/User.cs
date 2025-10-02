@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +10,7 @@ namespace Ascendix_Backend.Models
     public class User : IdentityUser
     {
         public string walletAddress { get; set; } = string.Empty;
+        [Column(TypeName = "decimal(18,2)")]
         public decimal totalPoints { get; set; }
 
         public DateTime createdAt { get; set; }

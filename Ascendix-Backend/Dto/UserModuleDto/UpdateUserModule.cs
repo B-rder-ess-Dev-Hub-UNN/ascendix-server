@@ -10,6 +10,6 @@ namespace Ascendix_Backend.Dto.UserModuleDto
     {
         public Guid? moduleId { get; set; }
         public Status? status { get; set; }
-        public decimal? progressPercent { get; set; }
+        public int? progressPercent { get; set; }
     }
 }

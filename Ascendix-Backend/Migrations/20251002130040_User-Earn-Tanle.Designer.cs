@@ -4,6 +4,7 @@ using Ascendix_Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ascendix_Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251002130040_User-Earn-Tanle")]
+    partial class UserEarnTanle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -404,8 +407,8 @@ namespace Ascendix_Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.Property<int>("progressPercent")
-                        .HasColumnType("int");
+                    b.Property<decimal>("progressPercent")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("status")
                         .HasColumnType("int");
@@ -453,8 +456,8 @@ namespace Ascendix_Backend.Migrations
                     b.Property<Guid>("moduleId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("progressPercent")
-                        .HasColumnType("int");
+                    b.Property<decimal>("progressPercent")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("status")
                         .HasColumnType("int");
@@ -581,13 +584,13 @@ namespace Ascendix_Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a1480bac-27dc-4e04-b562-4f6dccbe9419",
+                            Id = "d925eac2-e355-497d-8ab9-946b6ea57fdd",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "dbe865c5-7645-45e6-8f97-91ff5dccbec7",
+                            Id = "430aee11-6c09-45df-817a-64f3edba5f71",
                             Name = "User",
                             NormalizedName = "USER"
                         });

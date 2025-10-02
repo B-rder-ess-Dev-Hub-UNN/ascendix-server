@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ namespace Ascendix_Backend.Models
         public Guid libraryId { get; set; }
         public string title { get; set; } = string.Empty;
         public string description { get; set; } = string.Empty;
+        [Column(TypeName = "decimal(18,2)")]
         public decimal tokenAllocation { get; set; }
         public DateTime createdAt { get; set; }
 
