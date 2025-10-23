@@ -9,6 +9,5 @@ namespace Ascendix_Backend.Dto.UserEarnDto
     public class CreateUserEarn
     {
         public decimal amountEarned { get; set; }
-        public DateTime earnedAt { get; set; }
     }
 }

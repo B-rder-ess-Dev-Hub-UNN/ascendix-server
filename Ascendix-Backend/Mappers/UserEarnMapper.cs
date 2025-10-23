@@ -15,7 +15,7 @@ namespace Ascendix_Backend.Mappers
             return new UserEarn
             {
                 amountEarned = create.amountEarned,
-                earnedAt = create.earnedAt,
+                earnedAt = DateTime.UtcNow
             };
         }
         public static ViewUserEarn fromUserEarn(this UserEarn earn)
