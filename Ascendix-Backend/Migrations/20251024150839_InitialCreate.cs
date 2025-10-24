@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ascendix_Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class FixingIds : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,10 +18,10 @@ namespace Ascendix_Backend.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,25 +32,25 @@ namespace Ascendix_Backend.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    walletAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    totalPoints = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    walletAddress = table.Column<string>(type: "text", nullable: false),
+                    totalPoints = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    createdAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,9 +61,9 @@ namespace Ascendix_Backend.Migrations
                 name: "library",
                 columns: table => new
                 {
-                    libraryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    libraryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    slug = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    libraryId = table.Column<Guid>(type: "uuid", nullable: false),
+                    libraryName = table.Column<string>(type: "text", nullable: false),
+                    slug = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -73,11 +74,11 @@ namespace Ascendix_Backend.Migrations
                 name: "quests",
                 columns: table => new
                 {
-                    questId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    tokenAllocation = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    questId = table.Column<Guid>(type: "uuid", nullable: false),
+                    title = table.Column<string>(type: "text", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: false),
+                    tokenAllocation = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    createdAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,9 +89,9 @@ namespace Ascendix_Backend.Migrations
                 name: "tags",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    slug = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: true),
+                    slug = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,14 +99,29 @@ namespace Ascendix_Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "userPays",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    userId = table.Column<string>(type: "text", nullable: true),
+                    amountPayed = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    paymentStatus = table.Column<int>(type: "integer", nullable: false),
+                    datePayed = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_userPays", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RoleId = table.Column<string>(type: "text", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -122,11 +138,11 @@ namespace Ascendix_Backend.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -143,10 +159,10 @@ namespace Ascendix_Backend.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    LoginProvider = table.Column<string>(type: "text", nullable: false),
+                    ProviderKey = table.Column<string>(type: "text", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -163,8 +179,8 @@ namespace Ascendix_Backend.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    RoleId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -187,10 +203,10 @@ namespace Ascendix_Backend.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    LoginProvider = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -204,19 +220,19 @@ namespace Ascendix_Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "leaderBoards",
+                name: "userEarns",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    rank = table.Column<int>(type: "int", nullable: false),
-                    userId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    earnings = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    userId = table.Column<string>(type: "text", nullable: true),
+                    amountEarned = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    earnedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_leaderBoards", x => x.id);
+                    table.PrimaryKey("PK_userEarns", x => x.id);
                     table.ForeignKey(
-                        name: "FK_leaderBoards_AspNetUsers_userId",
+                        name: "FK_userEarns_AspNetUsers_userId",
                         column: x => x.userId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
@@ -226,12 +242,12 @@ namespace Ascendix_Backend.Migrations
                 name: "course",
                 columns: table => new
                 {
-                    courseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    libraryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    tokenAllocation = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    courseId = table.Column<Guid>(type: "uuid", nullable: false),
+                    libraryId = table.Column<Guid>(type: "uuid", nullable: false),
+                    title = table.Column<string>(type: "text", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: false),
+                    tokenAllocation = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    createdAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -248,11 +264,11 @@ namespace Ascendix_Backend.Migrations
                 name: "userQuest",
                 columns: table => new
                 {
-                    userQuestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    userId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    questId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    status = table.Column<int>(type: "int", nullable: false),
-                    completedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    userQuestId = table.Column<Guid>(type: "uuid", nullable: false),
+                    userId = table.Column<string>(type: "text", nullable: true),
+                    questId = table.Column<Guid>(type: "uuid", nullable: false),
+                    status = table.Column<int>(type: "integer", nullable: false),
+                    completedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -274,9 +290,9 @@ namespace Ascendix_Backend.Migrations
                 name: "certificates",
                 columns: table => new
                 {
-                    certificateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    courseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    metaDataUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    certificateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    courseId = table.Column<Guid>(type: "uuid", nullable: false),
+                    metaDataUrl = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -293,10 +309,10 @@ namespace Ascendix_Backend.Migrations
                 name: "courseTags",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    tagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    courseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    tagId = table.Column<Guid>(type: "uuid", nullable: false),
+                    courseId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -324,11 +340,11 @@ namespace Ascendix_Backend.Migrations
                 name: "modules",
                 columns: table => new
                 {
-                    moduleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    courseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    position = table.Column<int>(type: "int", nullable: false),
-                    title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    courseContent = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    moduleId = table.Column<Guid>(type: "uuid", nullable: false),
+                    courseId = table.Column<Guid>(type: "uuid", nullable: false),
+                    position = table.Column<int>(type: "integer", nullable: false),
+                    title = table.Column<string>(type: "text", nullable: false),
+                    courseContent = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -345,21 +361,20 @@ namespace Ascendix_Backend.Migrations
                 name: "userCourseProgresses",
                 columns: table => new
                 {
-                    progressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    userId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    courseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    progressPercent = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    status = table.Column<int>(type: "int", nullable: false),
-                    grade = table.Column<string>(type: "nvarchar(1)", nullable: false),
-                    completedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    userId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    progressId = table.Column<Guid>(type: "uuid", nullable: false),
+                    userId = table.Column<string>(type: "text", nullable: true),
+                    courseId = table.Column<Guid>(type: "uuid", nullable: false),
+                    progressPercent = table.Column<int>(type: "integer", nullable: false),
+                    status = table.Column<int>(type: "integer", nullable: false),
+                    grade = table.Column<char>(type: "character(1)", nullable: false),
+                    completedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_userCourseProgresses", x => x.progressId);
                     table.ForeignKey(
-                        name: "FK_userCourseProgresses_AspNetUsers_userId1",
-                        column: x => x.userId1,
+                        name: "FK_userCourseProgresses_AspNetUsers_userId",
+                        column: x => x.userId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -374,10 +389,10 @@ namespace Ascendix_Backend.Migrations
                 name: "userCertificates",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    certificateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    userId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    issuedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    certificateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    userId = table.Column<string>(type: "text", nullable: true),
+                    issuedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -399,10 +414,10 @@ namespace Ascendix_Backend.Migrations
                 name: "moduleQuizzes",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    moduleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    moduleId = table.Column<Guid>(type: "uuid", nullable: false),
+                    title = table.Column<string>(type: "text", nullable: true),
+                    description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -416,13 +431,40 @@ namespace Ascendix_Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "userModules",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    moduleId = table.Column<Guid>(type: "uuid", nullable: false),
+                    userId = table.Column<string>(type: "text", nullable: true),
+                    status = table.Column<int>(type: "integer", nullable: false),
+                    progressPercent = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_userModules", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_userModules_AspNetUsers_userId",
+                        column: x => x.userId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_userModules_modules_moduleId",
+                        column: x => x.moduleId,
+                        principalTable: "modules",
+                        principalColumn: "moduleId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "quizQuestions",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    moduleQuizId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    questionText = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    questionType = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    moduleQuizId = table.Column<Guid>(type: "uuid", nullable: false),
+                    questionText = table.Column<string>(type: "text", nullable: true),
+                    questionScore = table.Column<int>(type: "integer", nullable: false),
+                    questionType = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -439,12 +481,12 @@ namespace Ascendix_Backend.Migrations
                 name: "userQuizAttempts",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    moduleQuizId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    userId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    score = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    moduleQuizId = table.Column<Guid>(type: "uuid", nullable: false),
+                    userId = table.Column<string>(type: "text", nullable: true),
+                    score = table.Column<int>(type: "integer", nullable: false),
+                    createdAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -466,11 +508,11 @@ namespace Ascendix_Backend.Migrations
                 name: "questionOptions",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    questionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    optionText = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    isCorrect = table.Column<bool>(type: "bit", nullable: false),
-                    quizQuestionsid = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    questionId = table.Column<Guid>(type: "uuid", nullable: false),
+                    optionText = table.Column<string>(type: "text", nullable: true),
+                    isCorrect = table.Column<bool>(type: "boolean", nullable: false),
+                    quizQuestionsid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -486,11 +528,11 @@ namespace Ascendix_Backend.Migrations
                 name: "userAnswers",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    questionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    userQuizAttemptId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    questionOptionsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    answerText = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    quizQuestionId = table.Column<Guid>(type: "uuid", nullable: false),
+                    userQuizAttemptId = table.Column<Guid>(type: "uuid", nullable: false),
+                    questionOptionsId = table.Column<Guid>(type: "uuid", nullable: false),
+                    answerText = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -502,8 +544,8 @@ namespace Ascendix_Backend.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_userAnswers_quizQuestions_questionId",
-                        column: x => x.questionId,
+                        name: "FK_userAnswers_quizQuestions_quizQuestionId",
+                        column: x => x.quizQuestionId,
                         principalTable: "quizQuestions",
                         principalColumn: "id");
                     table.ForeignKey(
@@ -518,8 +560,8 @@ namespace Ascendix_Backend.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1bd183a2-1aa9-4170-9955-1a10c587df39", null, "User", "USER" },
-                    { "2156e65b-899b-483a-9204-c1d7ffba2697", null, "Admin", "ADMIN" }
+                    { "31f19dbd-1701-40f9-aa0f-da17104f69d1", null, "Admin", "ADMIN" },
+                    { "b2db7c3e-e242-4c2f-be55-025ab8f20108", null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -531,8 +573,7 @@ namespace Ascendix_Backend.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -558,8 +599,7 @@ namespace Ascendix_Backend.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_certificates_courseId",
@@ -587,11 +627,6 @@ namespace Ascendix_Backend.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_leaderBoards_userId",
-                table: "leaderBoards",
-                column: "userId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_moduleQuizzes_moduleId",
                 table: "moduleQuizzes",
                 column: "moduleId");
@@ -612,14 +647,14 @@ namespace Ascendix_Backend.Migrations
                 column: "moduleQuizId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_userAnswers_questionId",
-                table: "userAnswers",
-                column: "questionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_userAnswers_questionOptionsId",
                 table: "userAnswers",
                 column: "questionOptionsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_userAnswers_quizQuestionId",
+                table: "userAnswers",
+                column: "quizQuestionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_userAnswers_userQuizAttemptId",
@@ -642,9 +677,24 @@ namespace Ascendix_Backend.Migrations
                 column: "courseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_userCourseProgresses_userId1",
+                name: "IX_userCourseProgresses_userId",
                 table: "userCourseProgresses",
-                column: "userId1");
+                column: "userId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_userEarns_userId",
+                table: "userEarns",
+                column: "userId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_userModules_moduleId",
+                table: "userModules",
+                column: "moduleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_userModules_userId",
+                table: "userModules",
+                column: "userId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_userQuest_questId",
@@ -690,9 +740,6 @@ namespace Ascendix_Backend.Migrations
                 name: "courseTags");
 
             migrationBuilder.DropTable(
-                name: "leaderBoards");
-
-            migrationBuilder.DropTable(
                 name: "userAnswers");
 
             migrationBuilder.DropTable(
@@ -700,6 +747,15 @@ namespace Ascendix_Backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "userCourseProgresses");
+
+            migrationBuilder.DropTable(
+                name: "userEarns");
+
+            migrationBuilder.DropTable(
+                name: "userModules");
+
+            migrationBuilder.DropTable(
+                name: "userPays");
 
             migrationBuilder.DropTable(
                 name: "userQuest");

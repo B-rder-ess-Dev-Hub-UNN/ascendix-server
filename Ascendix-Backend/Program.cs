@@ -187,6 +187,10 @@ using Newtonsoft.Json;
 using dotenv.net;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
+
+
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 var builder = WebApplication.CreateBuilder(args);
 
 DotEnv.Load();
@@ -247,7 +251,7 @@ var connection_string = builder.Configuration["CONNECTION_STRING"];
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(connection_string);
+    options.UseNpgsql(connection_string);
 });
 
 builder.Services.AddControllers()
