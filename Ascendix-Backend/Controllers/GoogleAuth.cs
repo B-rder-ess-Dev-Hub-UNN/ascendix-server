@@ -130,6 +130,7 @@ namespace YourNamespace.Controllers
             }
 
             // Get roles to pass to your CreateToken method
+            var RoleResult = await _userManager.AddToRoleAsync(user, "User");
             var roles = await _userManager.GetRolesAsync(user);
             var roleList = roles?.ToList() ?? new List<string>();
 
