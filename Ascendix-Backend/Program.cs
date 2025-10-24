@@ -287,12 +287,12 @@ builder.Services.AddAuthentication(options =>
 })
 .AddGoogle(googleOptions =>
 {
-    var clientId = builder.Configuration["Authentication:Google:ClientId"];
+    var clientId = builder.Configuration["Authentication_Google_ClientId"];
     if (clientId == null)
     {
         throw new ArgumentNullException(nameof(clientId), "Google ClientId is not configured");
     }
-    var clientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+    var clientSecret = builder.Configuration["Authentication_Google_ClientSecret"];
     if (clientSecret == null)
     {
         throw new ArgumentNullException(nameof(clientSecret), "Google ClientSecret is not configured");
